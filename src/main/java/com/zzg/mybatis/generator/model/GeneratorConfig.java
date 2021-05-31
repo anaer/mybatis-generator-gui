@@ -46,6 +46,12 @@ public class GeneratorConfig {
 
 	private boolean useLombokPlugin;
 
+	private boolean useBatchInsertPlugin;
+
+	private boolean enableSelective;
+
+	private boolean useModelColumnPlugin;
+
 	private boolean needForUpdate;
 
 	private boolean annotationDAO;
@@ -295,4 +301,49 @@ public class GeneratorConfig {
 	public boolean isUseDAOExtendStyle() {
 		return useDAOExtendStyle;
 	}
+
+	/**
+	 * @return the useBatchInsertPlugin
+	 */
+	public boolean isUseBatchInsertPlugin() {
+		return useBatchInsertPlugin;
+	}
+
+	/**
+	 * @param useBatchInsertPlugin the useBatchInsertPlugin to set
+	 */
+	public void setUseBatchInsertPlugin(boolean useBatchInsertPlugin) {
+		this.useBatchInsertPlugin = useBatchInsertPlugin;
+	}
+
+	/**
+	 * @return the useModelColumnPlugin
+	 */
+	public boolean isUseModelColumnPlugin() {
+		return useModelColumnPlugin;
+	}
+
+	/**
+	 * @param useModelColumnPlugin the useModelColumnPlugin to set
+	 */
+	public void setUseModelColumnPlugin(boolean useModelColumnPlugin) {
+		this.useModelColumnPlugin = useModelColumnPlugin;
+	}
+
+	/**
+	 * @return the enableSelective
+	 */
+	public boolean isEnableSelective() {
+		return enableSelective;
+	}
+
+	/**
+	 * @param enableSelective the enableSelective to set
+	 */
+	public void setEnableSelective(boolean enableSelective) {
+		this.enableSelective = enableSelective;
+	}
+
+
+	
 }

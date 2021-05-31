@@ -204,6 +204,13 @@
                                           <CheckBox fx:id="useSchemaPrefix" mnemonicParsing="false" text="使用Schema前缀" />
                                        </children>
                                     </HBox>
+                                    <HBox spacing="18.0">
+                                       <children>
+                                          <CheckBox fx:id="useBatchInsertPlugin" mnemonicParsing="false" text="BatchInsertPlugin" />
+                                          <CheckBox fx:id="enableSelective" mnemonicParsing="false" text="是否生成BatchInsertSelective" />
+                                          <CheckBox fx:id="useModelColumnPlugin" mnemonicParsing="false" text="ModelColumnPlugin" />
+                                       </children>
+                                    </HBox>
                                      <HBox prefHeight="100.0" prefWidth="200.0" spacing="18.0">
                                          <children>
                                              <CheckBox fx:id="forUpdateCheckBox" mnemonicParsing="false" selected="false" text="select 增加ForUpdate" />
