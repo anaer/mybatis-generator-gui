@@ -224,6 +224,13 @@ public class MybatisGeneratorBridge {
             pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.BatchInsertPlugin");
             context.addPluginConfiguration(pluginConfiguration);
         }
+        // BatchUpdate 插件
+        if (generatorConfig.isUseBatchUpdatePlugin()) {
+            PluginConfiguration pluginConfiguration = new PluginConfiguration();
+            pluginConfiguration.addProperty("type", "com.zzg.mybatis.generator.plugins.BatchUpdatePlugin");
+            pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.BatchUpdatePlugin");
+            context.addPluginConfiguration(pluginConfiguration);
+        }
         // toString, hashCode, equals插件
         else if (generatorConfig.isNeedToStringHashcodeEquals()) {
             PluginConfiguration pluginConfiguration1 = new PluginConfiguration();

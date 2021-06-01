@@ -52,6 +52,8 @@ public class GeneratorConfig {
 
 	private boolean useModelColumnPlugin;
 
+	private boolean useBatchUpdatePlugin;
+
 	private boolean needForUpdate;
 
 	private boolean annotationDAO;
@@ -342,6 +344,20 @@ public class GeneratorConfig {
 	 */
 	public void setEnableSelective(boolean enableSelective) {
 		this.enableSelective = enableSelective;
+	}
+
+	/**
+	 * @return the useBatchUpdatePlugin
+	 */
+	public boolean isUseBatchUpdatePlugin() {
+		return useBatchUpdatePlugin;
+	}
+
+	/**
+	 * @param useBatchUpdatePlugin the useBatchUpdatePlugin to set
+	 */
+	public void setUseBatchUpdatePlugin(boolean useBatchUpdatePlugin) {
+		this.useBatchUpdatePlugin = useBatchUpdatePlugin;
 	}
 
 

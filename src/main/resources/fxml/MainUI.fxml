@@ -211,6 +211,11 @@
                                           <CheckBox fx:id="useModelColumnPlugin" mnemonicParsing="false" text="ModelColumnPlugin" />
                                        </children>
                                     </HBox>
+                                    <HBox spacing="18.0">
+                                       <children>
+                                          <CheckBox fx:id="useBatchUpdatePlugin" mnemonicParsing="false" text="BatchUpdatePlugin" />
+                                       </children>
+                                    </HBox>
                                      <HBox prefHeight="100.0" prefWidth="200.0" spacing="18.0">
                                          <children>
                                              <CheckBox fx:id="forUpdateCheckBox" mnemonicParsing="false" selected="false" text="select 增加ForUpdate" />

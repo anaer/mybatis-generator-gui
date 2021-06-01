@@ -98,6 +98,8 @@ public class MainUIController extends BaseFXController {
     @FXML
     private CheckBox useBatchInsertPlugin;
     @FXML
+    private CheckBox useBatchUpdatePlugin;
+    @FXML
     private CheckBox enableSelective;
     @FXML
     private CheckBox useModelColumnPlugin;
@@ -300,6 +302,7 @@ public class MainUIController extends BaseFXController {
         forUpdateCheckBox.setTooltip(new Tooltip("在Select语句中增加for update后缀"));
         useLombokPlugin.setTooltip(new Tooltip("实体类使用Lombok @Data简化代码"));
         useBatchInsertPlugin.setTooltip(new Tooltip("生成BatchInsert代码"));
+        useBatchUpdatePlugin.setTooltip(new Tooltip("生成BatchUpdate代码"));
     }
 
     void loadLeftDBTree() {
@@ -461,6 +464,7 @@ public class MainUIController extends BaseFXController {
         generatorConfig.setNeedToStringHashcodeEquals(needToStringHashcodeEquals.isSelected());
         generatorConfig.setUseLombokPlugin(useLombokPlugin.isSelected());
         generatorConfig.setUseBatchInsertPlugin(useBatchInsertPlugin.isSelected());
+        generatorConfig.setUseBatchUpdatePlugin(useBatchUpdatePlugin.isSelected());
         generatorConfig.setEnableSelective(enableSelective.isSelected());
         generatorConfig.setUseModelColumnPlugin(useModelColumnPlugin.isSelected());
         generatorConfig.setUseTableNameAlias(useTableNameAliasCheckbox.isSelected());
@@ -494,6 +498,7 @@ public class MainUIController extends BaseFXController {
         needToStringHashcodeEquals.setSelected(generatorConfig.isNeedToStringHashcodeEquals());
         useLombokPlugin.setSelected(generatorConfig.isUseLombokPlugin());
         useBatchInsertPlugin.setSelected(generatorConfig.isUseBatchInsertPlugin());
+        useBatchUpdatePlugin.setSelected(generatorConfig.isUseBatchUpdatePlugin());
         useTableNameAliasCheckbox.setSelected(generatorConfig.getUseTableNameAlias());
         forUpdateCheckBox.setSelected(generatorConfig.isNeedForUpdate());
         annotationDAOCheckBox.setSelected(generatorConfig.isAnnotationDAO());
