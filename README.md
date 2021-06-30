@@ -1,3 +1,11 @@
+<p>
+    <a href="https://www.codacy.com/gh/anaer/mybatis-generator-gui/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=anaer/mybatis-generator-gui&amp;utm_campaign=Badge_Grade">
+		<img src="https://app.codacy.com/project/badge/Grade/8a6897d9de7440dd9de8804c28d2871d"/>
+    </a>
+</p>
+
+------------
+
 mybatis-generator-gui
 ==============
 
