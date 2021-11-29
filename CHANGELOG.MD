@@ -7,3 +7,4 @@
    默认忽略列表: ignoreTablePrefix = { "t_" }
 3. com.zzg.mybatis.generator.controller.MainUIController 支持配置Mapper后缀
    目前的开发规范的Mapper后缀
+4. 调整MainUI.fxml首页布局, 可使用SceneBuilder程序进行编辑调整

@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="650.0" prefWidth="918.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zzg.mybatis.generator.controller.MainUIController">
+<BorderPane prefHeight="674.0" prefWidth="918.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zzg.mybatis.generator.controller.MainUIController">
    <top>
       <VBox>
          <children>
@@ -36,19 +49,19 @@
       </VBox>
    </top>
    <center>
-      <SplitPane dividerPositions="0.15">
+      <SplitPane dividerPositions="0.18777292576419213">
          <items>
-            <AnchorPane maxWidth="500.0" minWidth="100.0" prefHeight="618.0" prefWidth="200.0">
+            <AnchorPane maxWidth="500.0" minWidth="100.0" prefHeight="618.0" prefWidth="250.0">
                <children>
-                  <TreeView fx:id="leftDBTree" layoutX="-14.0" maxWidth="134.0" prefHeight="600.0" prefWidth="134.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <TextField fx:id="filterTreeBox" layoutY="504.0" prefHeight="26.0" prefWidth="134.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" promptText="搜索" />
+                  <TreeView fx:id="leftDBTree" layoutX="-14.0" maxWidth="234.0" prefHeight="600.0" prefWidth="234.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TextField fx:id="filterTreeBox" layoutY="504.0" prefHeight="26.0" prefWidth="134.0" promptText="搜索" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
             <AnchorPane minWidth="400.0">
                <children>
-                  <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox layoutX="-64.0" prefHeight="591.0" prefWidth="730.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <GridPane alignment="TOP_RIGHT" layoutX="5.0" layoutY="29.0" prefHeight="600.0" prefWidth="766.0" vgap="5.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="10.0">
+                        <GridPane alignment="TOP_RIGHT" layoutX="5.0" layoutY="29.0" prefHeight="652.0" prefWidth="659.0" vgap="5.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="10.0">
                            <columnConstraints>
                               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="157.0" minWidth="132.0" prefWidth="138.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="222.0" />
@@ -58,17 +71,16 @@
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="95.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="25.0" minHeight="8.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="110.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="200.0" minHeight="30.0" prefHeight="200.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="100.0" minHeight="11.0" prefHeight="50.0" />
+                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="250.0" minHeight="30.0" prefHeight="250.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="100.0" minHeight="0.0" prefHeight="34.0" />
                            </rowConstraints>
                            <children>
                               <Label text="表名" />
@@ -80,7 +92,7 @@
                               <Label text="Java实体类名" GridPane.rowIndex="1" />
                               <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                  <children>
-                                    <TextField fx:id="domainObjectNameField" prefHeight="27.0" prefWidth="154.0" promptText="Person" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <TextField fx:id="domainObjectNameField" prefHeight="27.0" prefWidth="206.0" promptText="Person" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="5.0" right="5.0" />
                                        </GridPane.margin>
@@ -102,7 +114,7 @@
                               <Label text="主键(选填)" GridPane.rowIndex="2" />
                               <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                  <children>
-                                    <TextField fx:id="generateKeysField" prefHeight="25.0" prefWidth="216.0" promptText="primary key, such as id" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <TextField fx:id="generateKeysField" prefHeight="25.0" prefWidth="207.0" promptText="primary key, such as id" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="5.0" right="5.0" />
                                        </GridPane.margin>
@@ -176,7 +188,7 @@
                                     <Insets left="5.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <VBox prefHeight="100.0" prefWidth="536.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="9">
+                              <VBox prefHeight="250.0" prefWidth="513.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="8">
                                  <children>
                                     <HBox alignment="CENTER_LEFT">
                                        <children>
@@ -187,6 +199,9 @@
                                                    <String fx:value="UTF-8" />
                                                 </FXCollections>
                                              </items>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
                                           </ChoiceBox>
                                        </children>
                                     </HBox>
@@ -204,16 +219,16 @@
                                     </HBox>
                                     <HBox spacing="18.0">
                                        <children>
-                                          <CheckBox fx:id="useLombokPlugin" mnemonicParsing="false" text="LombokPlugin" />
-                                          <CheckBox fx:id="needToStringHashcodeEquals" mnemonicParsing="false" selected="true" text="生成toString/hashCode/equals方法" />
-                                          <CheckBox fx:id="useSchemaPrefix" mnemonicParsing="false" text="使用Schema前缀" />
+                                          <CheckBox fx:id="useLombokPlugin" mnemonicParsing="false" prefHeight="16.0" prefWidth="138.0" selected="true" text="LombokPlugin" />
+                                          <CheckBox fx:id="needToStringHashcodeEquals" mnemonicParsing="false" prefHeight="16.0" prefWidth="249.0" selected="true" text="生成toString/hashCode/equals方法" />
+                                          <CheckBox fx:id="useSchemaPrefix" mnemonicParsing="false" prefHeight="16.0" prefWidth="144.0" text="使用Schema前缀" />
                                        </children>
                                     </HBox>
                                     <HBox spacing="18.0">
                                        <children>
-                                          <CheckBox fx:id="useBatchInsertPlugin" mnemonicParsing="false" text="BatchInsertPlugin" />
-                                          <CheckBox fx:id="enableSelective" mnemonicParsing="false" text="是否生成BatchInsertSelective" />
-                                          <CheckBox fx:id="useModelColumnPlugin" mnemonicParsing="false" text="ModelColumnPlugin" />
+                                          <CheckBox fx:id="useBatchInsertPlugin" mnemonicParsing="false" prefHeight="16.0" prefWidth="146.0" text="BatchInsertPlugin" />
+                                          <CheckBox fx:id="enableSelective" mnemonicParsing="false" prefHeight="16.0" prefWidth="209.0" text="是否生成BatchInsertSelective" />
+                                          <CheckBox fx:id="useModelColumnPlugin" mnemonicParsing="false" prefHeight="16.0" prefWidth="164.0" text="ModelColumnPlugin" />
                                        </children>
                                     </HBox>
                                     <HBox spacing="18.0">
@@ -221,15 +236,15 @@
                                           <CheckBox fx:id="useBatchUpdatePlugin" mnemonicParsing="false" text="BatchUpdatePlugin" />
                                        </children>
                                     </HBox>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="18.0">
+                                    <HBox prefHeight="16.0" prefWidth="474.0" spacing="18.0">
                                        <children>
                                           <CheckBox fx:id="forUpdateCheckBox" mnemonicParsing="false" selected="false" text="select 增加ForUpdate" />
-                                          <CheckBox fx:id="annotationDAOCheckBox" mnemonicParsing="false" selected="true" text="DAO使用 @Repository 注解" />
+                                          <CheckBox fx:id="annotationDAOCheckBox" mnemonicParsing="false" text="DAO使用 @Repository 注解" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <CheckBox fx:id="useDAOExtendStyle" mnemonicParsing="false" selected="true" text="DAO方法抽出到公共父接口">
+                                          <CheckBox fx:id="useDAOExtendStyle" mnemonicParsing="false" text="DAO方法抽出到公共父接口">
                                              <HBox.margin>
                                                 <Insets right="10.0" />
                                              </HBox.margin>
@@ -250,7 +265,7 @@
                                     <Insets left="5.0" />
                                  </padding>
                               </VBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="10">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="9">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#generateCode" text="代码生成">
                                        <styleClass>
