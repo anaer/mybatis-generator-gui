@@ -1,9 +1,14 @@
 package com.zzg.mybatis.generator.util;
 
+import cn.hutool.core.text.NamingCase;
+import cn.hutool.core.util.StrUtil;
+
 /**
  * Created by Owen on 6/18/16.
  */
 public class MyStringUtils {
+
+    private static final String[] ignoreTablePrefix = { "t_" };
 
     /**
      *
@@ -13,30 +18,18 @@ public class MyStringUtils {
      * @return
      */
     public static String dbStringToCamelStyle(String str) {
-        if (str != null) {
-            if (str.contains("_")) {
-                str = str.toLowerCase();
-                StringBuilder sb = new StringBuilder();
-                sb.append(String.valueOf(str.charAt(0)).toUpperCase());
-                for (int i = 1; i < str.length(); i++) {
-                    char c = str.charAt(i);
-                    if (c != '_') {
-                        sb.append(c);
-                    } else {
-                        if (i + 1 < str.length()) {
-                            sb.append(String.valueOf(str.charAt(i + 1)).toUpperCase());
-                            i++;
-                        }
-                    }
+
+        // 判断是否存在需忽略的表前缀, 如果存在则去除
+        if (ignoreTablePrefix != null && ignoreTablePrefix.length > 0) {
+            for (String prefix : ignoreTablePrefix) {
+                if (StrUtil.startWith(str, prefix)) {
+                    str = StrUtil.removePrefix(str, prefix);
+                    break;
                 }
-                return sb.toString();
-            } else {
-                String firstChar = String.valueOf(str.charAt(0)).toUpperCase();
-                String otherChars = str.substring(1);
-                return firstChar + otherChars;
             }
         }
-        return null;
+
+        return NamingCase.toPascalCase(str);
     }
 
 }

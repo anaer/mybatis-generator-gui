@@ -58,6 +58,10 @@ public class MainUIController extends BaseFXController {
 
     private static final Logger _LOG = LoggerFactory.getLogger(MainUIController.class);
     private static final String FOLDER_NO_EXIST = "部分目录不存在，是否创建";
+    /**
+     * Mapper文件后缀配置. 一般是DAO, Dao, 偶尔Mapper
+     */
+    private static final String MAPPER_SUFFIX = "Mapper";
     // tool bar buttons
     @FXML
     private Label connectionLabel;
@@ -230,7 +234,7 @@ public class MainUIController extends BaseFXController {
                         this.tableName = tableName;
                         tableNameField.setText(tableName);
                         domainObjectNameField.setText(MyStringUtils.dbStringToCamelStyle(tableName));
-                        mapperName.setText(domainObjectNameField.getText().concat("DAO"));
+                        mapperName.setText(domainObjectNameField.getText().concat(MAPPER_SUFFIX));
                     }
                 }
             });
