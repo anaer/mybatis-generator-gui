@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
  *
  * Created by Owen on 8/21/16.
  */
+@SuppressWarnings("all")
 public class GeneratorConfigController extends BaseFXController {
 
     private static final Logger _LOG = LoggerFactory.getLogger(GeneratorConfigController.class);

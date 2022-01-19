@@ -11,7 +11,8 @@ public class MyStringUtils {
     private static final String[] ignoreTablePrefix = { "t_" };
 
     /**
-     *
+     * 下划线转驼峰
+     * 如果存在需忽略的表前缀, 则进行忽略
      * convert string from slash style to camel style, such as my_course will convert to MyCourse
      *
      * @param str

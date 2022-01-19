@@ -1,5 +1,7 @@
 package com.zzg.mybatis.generator.controller;
 
+import cn.hutool.core.util.StrUtil;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.net.URL;
@@ -188,6 +190,15 @@ public class MainUIController extends BaseFXController {
                 ev.consume();
             }
         });
+
+        // 当应用配置, 设置过滤文本框时, 触发事件进行过滤
+        filterTreeBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (StrUtil.isNotBlank(newValue)) {
+                ObservableList<TreeItem<String>> schemas = leftDBTree.getRoot().getChildren();
+                schemas.filtered(TreeItem::isExpanded).forEach(this::displayTables);
+            }
+        });
+
         leftDBTree.setCellFactory((TreeView<String> tv) -> {
             TreeCell<String> cell = defaultCellFactory.call(tv);
 
@@ -513,6 +524,9 @@ public class MainUIController extends BaseFXController {
         useDAOExtendStyle.setSelected(generatorConfig.isUseDAOExtendStyle());
         useSchemaPrefix.setSelected(generatorConfig.isUseSchemaPrefix());
         jsr310Support.setSelected(generatorConfig.isJsr310Support());
+
+        // 应用配置时, 自动填充过滤文本框
+        filterTreeBox.setText(generatorConfig.getTableName());
     }
 
     @FXML

@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -31,7 +30,7 @@ public class DbUtil {
     private static Map<DbType, Driver> drivers = new HashMap<>();
 
 	private static ExecutorService executorService = Executors.newSingleThreadExecutor();
-	private static volatile boolean portForwaring = false;
+	private static volatile boolean portForwarding = false;
 	private static Map<Integer, Session> portForwardingSession = new ConcurrentHashMap<>();
 
     public static Session getSSHSession(DatabaseConfig databaseConfig) {
@@ -67,7 +66,7 @@ public class DbUtil {
 
 	public static void engagePortForwarding(Session sshSession, DatabaseConfig config) {
 		if (sshSession != null) {
-			AtomicInteger assinged_port = new AtomicInteger();
+			AtomicInteger assigned_port = new AtomicInteger();
 			Future<?> result = executorService.submit(() -> {
 				try {
 					Integer localPort = NumberUtils.createInteger(config.getLport());
@@ -84,10 +83,10 @@ public class DbUtil {
 						}
 					}
 					sshSession.connect();
-					assinged_port.set(sshSession.setPortForwardingL(lport, config.getHost(), rport));
+					assigned_port.set(sshSession.setPortForwardingL(lport, config.getHost(), rport));
 					portForwardingSession.put(lport, sshSession);
-					portForwaring = true;
-					_LOG.info("portForwarding Enabled, {}", assinged_port);
+					portForwarding = true;
+					_LOG.info("portForwarding Enabled, {}", assigned_port);
 				} catch (JSchException e) {
 					_LOG.error("Connect Over SSH failed", e);
 					if (e.getCause() != null && e.getCause().getMessage().equals("Address already in use: JVM_Bind")) {
@@ -114,7 +113,7 @@ public class DbUtil {
 	}
 
 	public static void shutdownPortForwarding(Session session) {
-		portForwaring = false;
+		portForwarding = false;
 		if (session != null && session.isConnected()) {
 			session.disconnect();
 			_LOG.info("portForwarding turn OFF");
@@ -207,7 +206,7 @@ public class DbUtil {
     public static String getConnectionUrlWithSchema(DatabaseConfig dbConfig) throws ClassNotFoundException {
 		DbType dbType = DbType.valueOf(dbConfig.getDbType());
 		String connectionUrl = String.format(dbType.getConnectionUrlPattern(),
-				portForwaring ? "127.0.0.1" : dbConfig.getHost(), portForwaring ? dbConfig.getLport() : dbConfig.getPort(), dbConfig.getSchema(), dbConfig.getEncoding());
+				portForwarding ? "127.0.0.1" : dbConfig.getHost(), portForwarding ? dbConfig.getLport() : dbConfig.getPort(), dbConfig.getSchema(), dbConfig.getEncoding());
         _LOG.info("getConnectionUrlWithSchema, connection url: {}", connectionUrl);
         return connectionUrl;
     }
