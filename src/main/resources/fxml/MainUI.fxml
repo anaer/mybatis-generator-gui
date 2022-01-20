@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="674.0" prefWidth="918.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zzg.mybatis.generator.controller.MainUIController">
+<BorderPane prefHeight="674.0" prefWidth="918.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zzg.mybatis.generator.controller.MainUIController">
    <top>
       <VBox>
          <children>
@@ -84,7 +84,7 @@
                            </rowConstraints>
                            <children>
                               <Label text="表名" />
-                              <TextField fx:id="tableNameField" disable="true" editable="false" prefHeight="27.0" prefWidth="156.0" promptText="person" GridPane.columnIndex="1">
+                              <TextField fx:id="tableNameField" disable="true" editable="false" prefHeight="27.0" prefWidth="150.0" promptText="person" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="5.0" right="5.0" />
                                  </GridPane.margin>
@@ -173,8 +173,8 @@
                                     <Insets left="5.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <Label prefHeight="27.0" prefWidth="99.0" text="映射XML文件包名" GridPane.rowIndex="7" />
-                              <TextField fx:id="mapperTargetPackage" prefHeight="27.0" prefWidth="248.0" promptText="com.example" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                              <Label prefHeight="27.0" prefWidth="99.0" text="映射XML文件包名" GridPane.rowIndex="6" />
+                              <TextField fx:id="mapperTargetPackage" prefHeight="27.0" prefWidth="248.0" promptText="com.example" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
@@ -182,13 +182,13 @@
                                     <Insets left="5.0" right="5.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <Label text="存放目录" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                              <TextField fx:id="mappingTargetProject" prefHeight="27.0" prefWidth="155.0" promptText="src/main/resources" text="src/main/resources" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
+                              <Label text="存放目录" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                              <TextField fx:id="mappingTargetProject" prefHeight="27.0" prefWidth="155.0" promptText="src/main/resources" text="src/main/resources" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <VBox prefHeight="250.0" prefWidth="513.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="8">
+                              <VBox prefHeight="250.0" prefWidth="625.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="8">
                                  <children>
                                     <HBox alignment="CENTER_LEFT">
                                        <children>
@@ -220,15 +220,15 @@
                                     <HBox spacing="18.0">
                                        <children>
                                           <CheckBox fx:id="useLombokPlugin" mnemonicParsing="false" prefHeight="16.0" prefWidth="138.0" selected="true" text="LombokPlugin" />
-                                          <CheckBox fx:id="needToStringHashcodeEquals" mnemonicParsing="false" prefHeight="16.0" prefWidth="249.0" selected="true" text="生成toString/hashCode/equals方法" />
+                                          <CheckBox fx:id="needToStringHashcodeEquals" mnemonicParsing="false" prefHeight="16.0" prefWidth="230.0" selected="true" text="生成toString/hashCode/equals方法" />
                                           <CheckBox fx:id="useSchemaPrefix" mnemonicParsing="false" prefHeight="16.0" prefWidth="144.0" text="使用Schema前缀" />
                                        </children>
                                     </HBox>
                                     <HBox spacing="18.0">
                                        <children>
-                                          <CheckBox fx:id="useBatchInsertPlugin" mnemonicParsing="false" prefHeight="16.0" prefWidth="146.0" text="BatchInsertPlugin" />
-                                          <CheckBox fx:id="enableSelective" mnemonicParsing="false" prefHeight="16.0" prefWidth="209.0" text="是否生成BatchInsertSelective" />
-                                          <CheckBox fx:id="useModelColumnPlugin" mnemonicParsing="false" prefHeight="16.0" prefWidth="164.0" text="ModelColumnPlugin" />
+                                          <CheckBox fx:id="useBatchInsertPlugin" mnemonicParsing="false" prefHeight="16.0" prefWidth="138.0" text="BatchInsertPlugin" />
+                                          <CheckBox fx:id="enableSelective" mnemonicParsing="false" prefHeight="16.0" prefWidth="230.0" text="是否生成BatchInsertSelective" />
+                                          <CheckBox fx:id="useModelColumnPlugin" mnemonicParsing="false" prefHeight="16.0" prefWidth="144.0" text="ModelColumnPlugin" />
                                        </children>
                                     </HBox>
                                     <HBox spacing="18.0">
@@ -287,12 +287,12 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Label text="自定义接口名称(选填)" GridPane.rowIndex="6">
+                              <Label text="自定义接口名称(选填)" GridPane.rowIndex="7">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
                               </Label>
-                              <TextField fx:id="mapperName" prefHeight="27.0" prefWidth="532.0" promptText="PersonDAO" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="6">
+                              <TextField fx:id="mapperName" prefHeight="27.0" prefWidth="166.0" promptText="PersonDAO" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
