@@ -1,5 +1,6 @@
 package com.zzg.mybatis.generator.controller;
 
+import cn.hutool.core.math.MathUtil;
 import cn.hutool.core.util.StrUtil;
 
 import java.awt.Desktop;
@@ -11,6 +12,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javax.tools.DiagnosticListener;
 
 import com.jcraft.jsch.Session;
 import com.zzg.mybatis.generator.bridge.MybatisGeneratorBridge;
@@ -437,9 +440,16 @@ public class MainUIController extends BaseFXController {
         if (Objects.nonNull(selectedDatabaseConfig)) {
             defaultName = String.format("%s.%s", selectedDatabaseConfig.getSchema(), tableNameField.getText());
         }
+
         TextInputDialog dialog = new TextInputDialog(defaultName);
         dialog.setTitle("保存当前配置");
         dialog.setContentText("请输入配置名称");
+
+        // 如果存在默认值, 则计算文本框长度, 6.5 相对较合适
+        if (StrUtil.isNotBlank(defaultName)) {
+            int prefWidth = (int) (StrUtil.length(defaultName) * 6.5);
+            dialog.getEditor().setPrefWidth(prefWidth);
+        }
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             String name = result.get();

@@ -51,8 +51,8 @@ public class TableColumnConfigsController extends BaseFXController {
 	@FXML
 	public void confirm() {
 		try {
-			// 1. generator bean propert name
-			this.genProertyNameByColumnNamePrefix();
+			// 1. generator bean property name
+			this.genPropertyNameByColumnNamePrefix();
 
 			// close window
 			this.closeDialogStage();
@@ -71,7 +71,7 @@ public class TableColumnConfigsController extends BaseFXController {
 		currentTableNameLabel.setText(tableName);
 	}
 
-	private void genProertyNameByColumnNamePrefix() {
+	private void genPropertyNameByColumnNamePrefix() {
 		String columnNamePrefix = this.columnNamePrefixTextLabel.getText();
 		if (StringUtils.isNotBlank(columnNamePrefix)) {
 			if (StringUtils.endsWith(columnNamePrefix.trim(), OR_REGEX)) {

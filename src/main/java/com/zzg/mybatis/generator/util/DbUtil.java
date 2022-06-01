@@ -1,5 +1,27 @@
 package com.zzg.mybatis.generator.util;
 
+import cn.hutool.core.util.ReUtil;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -8,16 +30,12 @@ import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.model.DbType;
 import com.zzg.mybatis.generator.model.UITableColumnVO;
 import com.zzg.mybatis.generator.view.AlertUtil;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.mybatis.generator.internal.util.ClassloaderUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by Owen on 6/12/16.
@@ -170,6 +188,10 @@ public class DbUtil {
 			if (StringUtils.isNotBlank(filter)) {
 				tables.removeIf(x -> !x.contains(filter) && !(x.replaceAll("_", "").contains(filter)));;
 			}
+
+			// 过滤带日期的备份表 如: t_user_2022-06-01
+			tables.removeIf(x -> ReUtil.isMatch("^(.*)_\\d{4}[_-]?\\d{2}[_-]?\\d{2}$", x));
+
 			if (tables.size() > 1) {
 				Collections.sort(tables);
 			}

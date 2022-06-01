@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="674.0" prefWidth="918.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zzg.mybatis.generator.controller.MainUIController">
+<BorderPane prefHeight="674.0" prefWidth="983.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zzg.mybatis.generator.controller.MainUIController">
    <top>
       <VBox>
          <children>
@@ -49,26 +49,26 @@
       </VBox>
    </top>
    <center>
-      <SplitPane dividerPositions="0.18777292576419213">
+      <SplitPane dividerPositions="0.2528032619775739">
          <items>
-            <AnchorPane maxWidth="500.0" minWidth="100.0" prefHeight="618.0" prefWidth="250.0">
+            <AnchorPane maxWidth="500.0" minWidth="100.0" prefHeight="591.0" prefWidth="242.0">
                <children>
-                  <TreeView fx:id="leftDBTree" layoutX="-14.0" maxWidth="234.0" prefHeight="600.0" prefWidth="234.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TreeView fx:id="leftDBTree" layoutX="-14.0" maxWidth="234.0" prefHeight="600.0" prefWidth="190.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-21.0" AnchorPane.topAnchor="0.0" />
                   <TextField fx:id="filterTreeBox" layoutY="504.0" prefHeight="26.0" prefWidth="134.0" promptText="搜索" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
-            <AnchorPane minWidth="400.0">
+            <AnchorPane minWidth="400.0" prefHeight="591.0" prefWidth="756.0">
                <children>
                   <VBox layoutX="-64.0" prefHeight="591.0" prefWidth="730.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <GridPane alignment="TOP_RIGHT" layoutX="5.0" layoutY="29.0" prefHeight="652.0" prefWidth="659.0" vgap="5.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="10.0">
+                        <GridPane alignment="TOP_RIGHT" layoutX="5.0" layoutY="29.0" prefHeight="589.0" prefWidth="670.0" vgap="5.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="10.0">
                            <columnConstraints>
                               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="157.0" minWidth="132.0" prefWidth="138.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="222.0" />
-                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="688.0" minWidth="69.0" prefWidth="76.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="108.0" />
-                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="129.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="95.0" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="688.0" minWidth="50.0" prefWidth="30.0" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="65.0" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0" prefWidth="22.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -130,7 +130,7 @@
                               <Label text="项目所在目录" GridPane.rowIndex="3" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField fx:id="projectFolderField" prefHeight="27.0" prefWidth="463.0" promptText="D:\workspace\example">
+                                    <TextField fx:id="projectFolderField" prefHeight="27.0" prefWidth="448.0" promptText="D:\workspace\example">
                                        <HBox.margin>
                                           <Insets left="5.0" right="5.0" />
                                        </HBox.margin>
@@ -144,7 +144,7 @@
                                  </children>
                               </HBox>
                               <Label text="实体类名包名" GridPane.rowIndex="4" />
-                              <TextField fx:id="modelTargetPackage" prefHeight="27.0" prefWidth="152.0" promptText="com.example.model" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                              <TextField fx:id="modelTargetPackage" prefHeight="27.0" prefWidth="272.0" promptText="com.example.model" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
@@ -152,14 +152,14 @@
                                     <Insets left="5.0" right="5.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <Label text="存放目录" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                              <TextField fx:id="modelTargetProject" prefHeight="27.0" prefWidth="228.0" promptText="src/main/java" text="src/main/java" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                              <Label text="存放目录" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <TextField fx:id="modelTargetProject" prefHeight="27.0" prefWidth="147.0" promptText="src/main/java" text="src/main/java" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
                               </TextField>
                               <Label text="Mapper接口包名" GridPane.rowIndex="5" />
-                              <TextField fx:id="daoTargetPackage" prefHeight="27.0" prefWidth="248.0" promptText="com.example.mapper" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                              <TextField fx:id="daoTargetPackage" prefHeight="27.0" prefWidth="248.0" promptText="com.example.mapper" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
@@ -167,14 +167,14 @@
                                     <Insets left="5.0" right="5.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <Label text="存放目录" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                              <TextField fx:id="daoTargetProject" prefHeight="27.0" prefWidth="155.0" promptText="src/main/java" text="src/main/java" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                              <Label text="存放目录" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                              <TextField fx:id="daoTargetProject" prefHeight="27.0" prefWidth="155.0" promptText="src/main/java" text="src/main/java" GridPane.columnIndex="4" GridPane.rowIndex="5">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
                               </TextField>
                               <Label prefHeight="27.0" prefWidth="99.0" text="映射XML文件包名" GridPane.rowIndex="6" />
-                              <TextField fx:id="mapperTargetPackage" prefHeight="27.0" prefWidth="248.0" promptText="com.example" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                              <TextField fx:id="mapperTargetPackage" prefHeight="27.0" prefWidth="248.0" promptText="com.example" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
@@ -182,8 +182,8 @@
                                     <Insets left="5.0" right="5.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <Label text="存放目录" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                              <TextField fx:id="mappingTargetProject" prefHeight="27.0" prefWidth="155.0" promptText="src/main/resources" text="src/main/resources" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6">
+                              <Label text="存放目录" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                              <TextField fx:id="mappingTargetProject" prefHeight="27.0" prefWidth="155.0" promptText="src/main/resources" text="src/main/resources" GridPane.columnIndex="4" GridPane.rowIndex="6">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
@@ -287,12 +287,12 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Label text="自定义接口名称(选填)" GridPane.rowIndex="7">
+                              <Label text="Mapper接口名(选填)" GridPane.rowIndex="7">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
                               </Label>
-                              <TextField fx:id="mapperName" prefHeight="27.0" prefWidth="166.0" promptText="PersonDAO" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                              <TextField fx:id="mapperName" prefHeight="27.0" prefWidth="248.0" promptText="PersonDAO" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>

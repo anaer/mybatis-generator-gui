@@ -1,8 +1,20 @@
 package com.zzg.mybatis.generator.controller;
 
+import cn.hutool.core.collection.CollUtil;
+
+import java.net.URL;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
 import com.zzg.mybatis.generator.model.GeneratorConfig;
 import com.zzg.mybatis.generator.util.ConfigHelper;
 import com.zzg.mybatis.generator.view.AlertUtil;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,12 +23,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * 管理GeneratorConfig的Controller
@@ -91,6 +97,13 @@ public class GeneratorConfigController extends BaseFXController {
     public void refreshTableView() {
         try {
             List<GeneratorConfig> configs = ConfigHelper.loadGeneratorConfigs();
+
+            // 按名称排序, 配置名格式为dbName.tableName时, 可以将同一db下的放在一起
+            if (CollUtil.isNotEmpty(configs)) {
+                configs = configs.stream().sorted(Comparator.comparing(GeneratorConfig::getName))
+                        .collect(Collectors.toList());
+            }
+
             configTable.setItems(FXCollections.observableList(configs));
         } catch (Exception e) {
             AlertUtil.showErrorAlert(e.getMessage());
