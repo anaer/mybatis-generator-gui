@@ -48,10 +48,6 @@ public class GeneratorConfig {
 
 	private boolean useBatchInsertPlugin;
 
-	private boolean enableSelective;
-
-	private boolean useModelColumnPlugin;
-
 	private boolean useBatchUpdatePlugin;
 
 	private boolean needForUpdate;
@@ -318,33 +314,6 @@ public class GeneratorConfig {
 		this.useBatchInsertPlugin = useBatchInsertPlugin;
 	}
 
-	/**
-	 * @return the useModelColumnPlugin
-	 */
-	public boolean isUseModelColumnPlugin() {
-		return useModelColumnPlugin;
-	}
-
-	/**
-	 * @param useModelColumnPlugin the useModelColumnPlugin to set
-	 */
-	public void setUseModelColumnPlugin(boolean useModelColumnPlugin) {
-		this.useModelColumnPlugin = useModelColumnPlugin;
-	}
-
-	/**
-	 * @return the enableSelective
-	 */
-	public boolean isEnableSelective() {
-		return enableSelective;
-	}
-
-	/**
-	 * @param enableSelective the enableSelective to set
-	 */
-	public void setEnableSelective(boolean enableSelective) {
-		this.enableSelective = enableSelective;
-	}
 
 	/**
 	 * @return the useBatchUpdatePlugin

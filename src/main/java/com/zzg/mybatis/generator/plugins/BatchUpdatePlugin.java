@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.zzg.mybatis.generator.util.MyStringUtils;
+
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
@@ -36,6 +38,7 @@ import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
 public class BatchUpdatePlugin extends PluginAdapter{
+	public static final String METHOD_BATCH_UPDATE = "updateBatch"; // 方法名
 	/**
 	 * 修改Mapper类
 	 */
@@ -69,7 +72,7 @@ public class BatchUpdatePlugin extends PluginAdapter{
 		FullyQualifiedJavaType ibsreturnType = FullyQualifiedJavaType.getIntInstance();// int型
 		ibsmethod.setReturnType(ibsreturnType);
 		// 3.设置方法名
-		ibsmethod.setName("updateBatchByPrimaryKeySelective");
+		ibsmethod.setName(METHOD_BATCH_UPDATE);
 		// 4.设置参数列表
 		FullyQualifiedJavaType paramType = FullyQualifiedJavaType.getNewListInstance();
 		FullyQualifiedJavaType paramListType;
@@ -92,7 +95,7 @@ public class BatchUpdatePlugin extends PluginAdapter{
 		String keyColumn=introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName();
 		
 		XmlElement insertBatchElement = new XmlElement("update");
-		insertBatchElement.addAttribute(new Attribute("id", "updateBatchByPrimaryKeySelective"));
+		insertBatchElement.addAttribute(new Attribute("id", METHOD_BATCH_UPDATE));
 		insertBatchElement.addAttribute(new Attribute("parameterType", "java.util.List"));
 		
 		XmlElement foreach=new XmlElement("foreach");
@@ -108,8 +111,11 @@ public class BatchUpdatePlugin extends PluginAdapter{
 			String columnName = introspectedColumn.getActualColumnName();
 			if(!columnName.toUpperCase().equalsIgnoreCase(keyColumn)){//不是自增字段的才会出现在批量插入中
 				XmlElement ifxml=new XmlElement("if");
-				ifxml.addAttribute(new Attribute("test", "item."+introspectedColumn.getJavaProperty()+"!=null"));
-				ifxml.addElement(new TextElement(columnName+"=#{item."+introspectedColumn.getJavaProperty()+",jdbcType="+introspectedColumn.getJdbcTypeName() + "},"));
+				ifxml.addAttribute(new Attribute("test",
+						"item." + introspectedColumn.getJavaProperty() + " != null"));
+				ifxml.addElement(new TextElement(MyStringUtils.wrapColumnName(columnName)
+						+ " = #{item." + introspectedColumn.getJavaProperty() + ",jdbcType="
+						+ introspectedColumn.getJdbcTypeName() + "},"));
 				trim1Element.addElement(ifxml);
 			}
 		}

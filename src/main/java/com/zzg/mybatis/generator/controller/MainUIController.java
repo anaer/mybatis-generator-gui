@@ -109,10 +109,6 @@ public class MainUIController extends BaseFXController {
     @FXML
     private CheckBox useBatchUpdatePlugin;
     @FXML
-    private CheckBox enableSelective;
-    @FXML
-    private CheckBox useModelColumnPlugin;
-    @FXML
     private CheckBox forUpdateCheckBox;
     @FXML
     private CheckBox annotationDAOCheckBox;
@@ -177,10 +173,6 @@ public class MainUIController extends BaseFXController {
         // selectedProperty().addListener 解决应用配置的时候未触发Clicked事件
         useLombokPlugin.selectedProperty().addListener((observable, oldValue, newValue) -> {
             needToStringHashcodeEquals.setDisable(newValue);
-        });
-
-        enableSelective.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            useModelColumnPlugin.setSelected(newValue);
         });
 
         leftDBTree.setShowRoot(false);
@@ -490,8 +482,6 @@ public class MainUIController extends BaseFXController {
         generatorConfig.setUseLombokPlugin(useLombokPlugin.isSelected());
         generatorConfig.setUseBatchInsertPlugin(useBatchInsertPlugin.isSelected());
         generatorConfig.setUseBatchUpdatePlugin(useBatchUpdatePlugin.isSelected());
-        generatorConfig.setEnableSelective(enableSelective.isSelected());
-        generatorConfig.setUseModelColumnPlugin(useModelColumnPlugin.isSelected());
         generatorConfig.setUseTableNameAlias(useTableNameAliasCheckbox.isSelected());
         generatorConfig.setNeedForUpdate(forUpdateCheckBox.isSelected());
         generatorConfig.setAnnotationDAO(annotationDAOCheckBox.isSelected());

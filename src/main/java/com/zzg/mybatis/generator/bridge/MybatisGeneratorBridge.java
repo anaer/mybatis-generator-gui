@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.itfsw.mybatis.generator.plugins.ModelColumnPlugin;
 import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.model.DbType;
 import com.zzg.mybatis.generator.model.GeneratorConfig;
@@ -235,16 +234,10 @@ public class MybatisGeneratorBridge {
             context.addPluginConfiguration(pluginConfiguration);
         }
 
-        // ModelColumn 插件
-        if (generatorConfig.isUseModelColumnPlugin()) {
-            PluginConfiguration pluginConfiguration = createPluginConfiguration(ModelColumnPlugin.class);
-            context.addPluginConfiguration(pluginConfiguration);
-        }
-
         // BatchInsert 插件
         if (generatorConfig.isUseBatchInsertPlugin()) {
-            PluginConfiguration pluginConfiguration = createPluginConfiguration(BatchInsertPlugin.class);
-            pluginConfiguration.addProperty("enableSelective", String.valueOf(generatorConfig.isEnableSelective()));
+            PluginConfiguration pluginConfiguration = createPluginConfiguration(
+                    BatchInsertPlugin.class);
             context.addPluginConfiguration(pluginConfiguration);
         }
         // BatchUpdate 插件

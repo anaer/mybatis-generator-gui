@@ -227,8 +227,6 @@
                                     <HBox spacing="18.0">
                                        <children>
                                           <CheckBox fx:id="useBatchInsertPlugin" mnemonicParsing="false" prefHeight="16.0" prefWidth="138.0" text="BatchInsertPlugin" />
-                                          <CheckBox fx:id="enableSelective" mnemonicParsing="false" prefHeight="16.0" prefWidth="230.0" text="是否生成BatchInsertSelective" />
-                                          <CheckBox fx:id="useModelColumnPlugin" mnemonicParsing="false" prefHeight="16.0" prefWidth="144.0" text="ModelColumnPlugin" />
                                        </children>
                                     </HBox>
                                     <HBox spacing="18.0">

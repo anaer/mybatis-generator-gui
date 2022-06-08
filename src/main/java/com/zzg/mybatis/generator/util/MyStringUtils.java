@@ -1,6 +1,7 @@
 package com.zzg.mybatis.generator.util;
 
 import cn.hutool.core.text.NamingCase;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 
 /**
@@ -9,6 +10,8 @@ import cn.hutool.core.util.StrUtil;
 public class MyStringUtils {
 
     private static final String[] ignoreTablePrefix = { "t_" };
+
+    private static final String[] MYSQL_KEYWORD = { "type", "timestamp" };
 
     /**
      * 下划线转驼峰
@@ -33,4 +36,17 @@ public class MyStringUtils {
         return NamingCase.toPascalCase(str);
     }
 
+    /**
+     * 判断字段名 是否需要包装
+     * @param columnName
+     * @return
+     */
+    public static String wrapColumnName(String columnName) {
+        String result = columnName;
+
+        if (ArrayUtil.contains(MYSQL_KEYWORD, columnName)) {
+            result = "`" + columnName + "`";
+        }
+        return result;
+    }
 }

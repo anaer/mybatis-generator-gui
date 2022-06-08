@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 20220608
+
+1. 去除 itfsw 依赖, 自实现 BatchInsertPlugin, 主要是 enableSelective 及 ModelColumnPlugin 基本没使用到, 后续有需要再进行调整
+
 ## 20220601
 
 1. 调整界面布局
