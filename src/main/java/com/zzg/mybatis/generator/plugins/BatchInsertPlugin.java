@@ -16,7 +16,6 @@ import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.TextElement;
@@ -47,10 +46,10 @@ public class BatchInsertPlugin extends PluginAdapter {
         * @return
         */
         @Override
-        public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass,
+        public boolean clientGenerated(Interface interfaze, 
                         IntrospectedTable introspectedTable) {
                 addBatchInsertMethod(interfaze, introspectedTable);
-                return super.clientGenerated(interfaze, topLevelClass, introspectedTable);
+                return super.clientGenerated(interfaze, introspectedTable);
         }
 
         private void addBatchInsertMethod(Interface interfaze,
@@ -61,14 +60,14 @@ public class BatchInsertPlugin extends PluginAdapter {
                 importedTypes.add(
                                 new FullyQualifiedJavaType(introspectedTable.getBaseRecordType()));
 
-                Method ibsmethod = new Method();
+                Method ibsmethod = new Method(METHOD_BATCH_INSERT);
                 // 1.设置方法可见性
                 ibsmethod.setVisibility(JavaVisibility.PUBLIC);
+                // 2. 设置抽象方法, 不需要实现
+                ibsmethod.setAbstract(true);
                 // 2.设置返回值类型
                 FullyQualifiedJavaType ibsreturnType = FullyQualifiedJavaType.getIntInstance();// int型
                 ibsmethod.setReturnType(ibsreturnType);
-                // 3.设置方法名
-                ibsmethod.setName(METHOD_BATCH_INSERT);
                 // 4.设置参数列表
                 FullyQualifiedJavaType paramType = FullyQualifiedJavaType.getNewListInstance();
                 FullyQualifiedJavaType paramListType;

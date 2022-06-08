@@ -285,8 +285,11 @@ public class MybatisGeneratorBridge {
             if (DbType.MySQL.name().equals(dbType) || DbType.MySQL_8.name().equals(dbType)
                     || DbType.PostgreSQL.name().equals(dbType)) {
                 PluginConfiguration pluginConfiguration = createPluginConfiguration(CommonDAOInterfacePlugin.class);
-                pluginConfiguration.addProperty("useExample", String.valueOf(generatorConfig.isUseExample()));
+                // pluginConfiguration.addProperty("useExample", String.valueOf(generatorConfig.isUseExample()));
                 context.addPluginConfiguration(pluginConfiguration);
+
+                context.getJavaClientGeneratorConfiguration().addProperty("useExample",
+                        String.valueOf(generatorConfig.isUseExample()));
             }
         }
 

@@ -30,7 +30,9 @@ public class CommonDAOInterfacePlugin extends PluginAdapter {
     }
     
     private boolean isUseExample() {
-    	return "true".equals(getProperties().getProperty("useExample"));
+        return "true"
+                .equals(context.getJavaClientGeneratorConfiguration().getProperty("useExample"));
+        // return "true".equals(getProperties().getProperty("useExample"));
 	}
 
     @Override
@@ -94,7 +96,6 @@ public class CommonDAOInterfacePlugin extends PluginAdapter {
 
     @Override
     public boolean clientGenerated(Interface interfaze,
-                                   TopLevelClass topLevelClass,
                                    IntrospectedTable introspectedTable) {
         interfaze.addJavaDocLine("/**");
         interfaze.addJavaDocLine(" * " + interfaze.getType().getShortName() + "继承基类");
@@ -270,22 +271,6 @@ public class CommonDAOInterfacePlugin extends PluginAdapter {
     public boolean clientUpdateByPrimaryKeySelectiveMethodGenerated(Method method,
                                                                     Interface interfaze, IntrospectedTable introspectedTable) {
         interceptModelParam(method);
-        return false;
-    }
-
-    @Override
-    public boolean clientUpdateByExampleWithoutBLOBsMethodGenerated(Method method, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-        if (isUseExample()) {
-			interceptModelAndExampleParam(method);
-		}
-        return false;
-    }
-
-    @Override
-    public boolean clientUpdateByExampleSelectiveMethodGenerated(Method method, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-        if (isUseExample()) {
-			interceptModelAndExampleParam(method);
-		}
         return false;
     }
 

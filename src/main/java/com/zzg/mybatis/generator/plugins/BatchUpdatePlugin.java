@@ -31,7 +31,6 @@ import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.TextElement;
@@ -43,9 +42,9 @@ public class BatchUpdatePlugin extends PluginAdapter{
 	 * 修改Mapper类
 	 */
 	@Override
-	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+	public boolean clientGenerated(Interface interfaze, IntrospectedTable introspectedTable) {
 		addBatchUpdateMethod(interfaze, introspectedTable);
-		return super.clientGenerated(interfaze, topLevelClass, introspectedTable);
+		return super.clientGenerated(interfaze, introspectedTable);
 	}
 	/**
 	 * 修改Mapper.xml
@@ -65,14 +64,14 @@ public class BatchUpdatePlugin extends PluginAdapter{
 		importedTypes.add(FullyQualifiedJavaType.getNewListInstance());
 		importedTypes.add(new FullyQualifiedJavaType(introspectedTable.getBaseRecordType()));
 
-		Method ibsmethod = new Method();
+		Method ibsmethod = new Method(METHOD_BATCH_UPDATE);
 		// 1.设置方法可见性
 		ibsmethod.setVisibility(JavaVisibility.PUBLIC);
+		// 2. 设置抽象方法, 不需要方法体
+		ibsmethod.setAbstract(true);
 		// 2.设置返回值类型
 		FullyQualifiedJavaType ibsreturnType = FullyQualifiedJavaType.getIntInstance();// int型
 		ibsmethod.setReturnType(ibsreturnType);
-		// 3.设置方法名
-		ibsmethod.setName(METHOD_BATCH_UPDATE);
 		// 4.设置参数列表
 		FullyQualifiedJavaType paramType = FullyQualifiedJavaType.getNewListInstance();
 		FullyQualifiedJavaType paramListType;

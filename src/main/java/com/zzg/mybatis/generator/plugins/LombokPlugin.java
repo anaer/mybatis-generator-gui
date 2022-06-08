@@ -179,7 +179,6 @@ public class LombokPlugin extends PluginAdapter {
 
     @Override
     public boolean clientGenerated(Interface interfaze,
-                                   TopLevelClass topLevelClass,
                                    IntrospectedTable introspectedTable) {
         // 一般统一配置扫包, 不需要单独添加注解
         // interfaze.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Mapper"));
