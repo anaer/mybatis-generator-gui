@@ -5,6 +5,8 @@
 1. 去除 itfsw 依赖, 自实现 BatchInsertPlugin, 主要是 enableSelective 及 ModelColumnPlugin 基本没使用到, 后续有需要再进行调整
 2. 升级 mybatis-generator-core 1.3.7 -> 1.4.1, 有些兼容性问题, 已处理
    新版生成的参数名有调整 record -> row
+3. 升级 log 包
+4. 去除 fastjson 依赖, 因为仅有一个地方用到, 可以先试用 hutool 中的 JSONUtil 工具顶替
 
 ## 20220601
 

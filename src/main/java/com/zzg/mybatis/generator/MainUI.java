@@ -1,18 +1,19 @@
 package com.zzg.mybatis.generator;
 
+import java.net.URL;
+
 import com.zzg.mybatis.generator.controller.MainUIController;
 import com.zzg.mybatis.generator.util.ConfigHelper;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.swing.*;
-import java.net.URL;
 
 /**
  * 这是本软件的主入口,要运行本软件请直接运行本类就可以了,不用传入任何参数
@@ -30,7 +31,7 @@ public class MainUI extends Application {
 		Parent root = fxmlLoader.load();
 		primaryStage.setResizable(true);
 		primaryStage.setScene(new Scene(root));
-		primaryStage.setTitle("Mybatis Generator GUI");
+		primaryStage.setTitle("Mybatis Generator GUI 22.6.8");
 		Image imageIcon = new Image("icons/mybatis-logo.png");
 		primaryStage.getIcons().add(imageIcon);
 		primaryStage.show();

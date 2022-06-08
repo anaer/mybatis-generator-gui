@@ -1,11 +1,6 @@
 package com.zzg.mybatis.generator.util;
 
-import com.alibaba.fastjson.JSON;
-import com.zzg.mybatis.generator.model.DatabaseConfig;
-import com.zzg.mybatis.generator.model.DbType;
-import com.zzg.mybatis.generator.model.GeneratorConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cn.hutool.json.JSONUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,6 +14,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.zzg.mybatis.generator.model.DatabaseConfig;
+import com.zzg.mybatis.generator.model.DbType;
+import com.zzg.mybatis.generator.model.GeneratorConfig;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * XML based config file help class
@@ -72,7 +74,8 @@ public class ConfigHelper {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String value = rs.getString("value");
-				DatabaseConfig databaseConfig = JSON.parseObject(value, DatabaseConfig.class);
+				DatabaseConfig databaseConfig = JSONUtil.toBean(value, DatabaseConfig.class);
+
 				databaseConfig.setId(id);
 				configs.add(databaseConfig);
 			}
@@ -99,7 +102,7 @@ public class ConfigHelper {
 					throw new RuntimeException("配置已经存在, 请使用其它名字");
 				}
 			}
-			String jsonStr = JSON.toJSONString(dbConfig);
+			String jsonStr = JSONUtil.toJsonStr(dbConfig);
 			String sql;
 			if (isUpdate) {
 				sql = String.format("UPDATE dbs SET name = '%s', value = '%s' where id = %d", configName, jsonStr, primaryKey);
@@ -137,7 +140,7 @@ public class ConfigHelper {
 		try {
 			conn = ConnectionManager.getConnection();
 			stat = conn.createStatement();
-			String jsonStr = JSON.toJSONString(generatorConfig);
+			String jsonStr = JSONUtil.toJsonStr(generatorConfig);
 			String sql = String.format("INSERT INTO generator_config values('%s', '%s')", generatorConfig.getName(),
 					jsonStr);
 			stat.executeUpdate(sql);
@@ -161,7 +164,7 @@ public class ConfigHelper {
 			GeneratorConfig generatorConfig = null;
 			if (rs.next()) {
 				String value = rs.getString("value");
-				generatorConfig = JSON.parseObject(value, GeneratorConfig.class);
+				generatorConfig = JSONUtil.toBean(value, GeneratorConfig.class);
 			}
 			return generatorConfig;
 		} finally {
@@ -184,7 +187,7 @@ public class ConfigHelper {
 			List<GeneratorConfig> configs = new ArrayList<>();
 			while (rs.next()) {
 				String value = rs.getString("value");
-				configs.add(JSON.parseObject(value, GeneratorConfig.class));
+				configs.add(JSONUtil.toBean(value, GeneratorConfig.class));
 			}
 			return configs;
 		} finally {

@@ -2,7 +2,7 @@
 
 mybatis-generator-gui 是基于 [mybatis generator](http://www.mybatis.org/generator/index.html) 开发一款界面工具, 本工具可以使你非常容易及快速生成 Mybatis 的 Java POJO 文件及数据库 Mapping 文件。
 
-![main](.media/220120-110602.png)
+![main](.media/220608-main.png)
 
 ![basic](https://user-images.githubusercontent.com/3505708/51911610-45754980-240d-11e9-85ad-643e55cafab2.png)
 
@@ -27,7 +27,7 @@ mybatis-generator-gui 是基于 [mybatis generator](http://www.mybatis.org/gener
 
 ### 运行
 
-VSCode 中启动, 找到`com.zzg.mybatis.generator.MainUI`类并运行就可以了（VSCode 安装 Java 环境）
+VSCode 中启动, 找到`com.zzg.mybatis.generator.Main`类并运行就可以了（VSCode 安装 Java 环境）
 
 ### 注意事项
 

@@ -1,6 +1,5 @@
 package com.zzg.mybatis.generator.controller;
 
-import cn.hutool.core.math.MathUtil;
 import cn.hutool.core.util.StrUtil;
 
 import java.awt.Desktop;
@@ -12,8 +11,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-import javax.tools.DiagnosticListener;
 
 import com.jcraft.jsch.Session;
 import com.zzg.mybatis.generator.bridge.MybatisGeneratorBridge;
