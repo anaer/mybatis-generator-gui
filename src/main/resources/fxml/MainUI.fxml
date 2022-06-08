@@ -227,10 +227,6 @@
                                     <HBox spacing="18.0">
                                        <children>
                                           <CheckBox fx:id="useBatchInsertPlugin" mnemonicParsing="false" prefHeight="16.0" prefWidth="138.0" text="BatchInsertPlugin" />
-                                       </children>
-                                    </HBox>
-                                    <HBox spacing="18.0">
-                                       <children>
                                           <CheckBox fx:id="useBatchUpdatePlugin" mnemonicParsing="false" text="BatchUpdatePlugin" />
                                        </children>
                                     </HBox>

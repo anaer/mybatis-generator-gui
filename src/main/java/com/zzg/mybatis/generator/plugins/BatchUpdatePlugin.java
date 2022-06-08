@@ -85,7 +85,7 @@ public class BatchUpdatePlugin extends PluginAdapter{
 		}
 		paramType.addTypeArgument(paramListType);
 
-		ibsmethod.addParameter(new Parameter(paramType, "records"));
+		ibsmethod.addParameter(new Parameter(paramType, "list"));
 
 		interfaze.addImportedTypes(importedTypes);
 		interfaze.addMethod(ibsmethod);
@@ -121,11 +121,14 @@ public class BatchUpdatePlugin extends PluginAdapter{
 		}
 		foreach.addElement(trim1Element);
 
-		foreach.addElement(new TextElement("where "));
 		int index=0;
+		StringBuilder condition = new StringBuilder();
 		for(IntrospectedColumn i:introspectedTable.getPrimaryKeyColumns()){
-			foreach.addElement(new TextElement((index>0?" AND ":"")+i.getActualColumnName()+" = #{item."+i.getJavaProperty()+",jdbcType="+i.getJdbcTypeName()+"}"));
+			condition.append((index++ > 0 ? " AND " : "") + i.getActualColumnName() + " = #{item."
+					+ i.getJavaProperty() + ",jdbcType=" + i.getJdbcTypeName() + "}");
 		}
+
+		foreach.addElement(new TextElement("where " + condition.toString()));
 		
 		insertBatchElement.addElement(foreach);
 
