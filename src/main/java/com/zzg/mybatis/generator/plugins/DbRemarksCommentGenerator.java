@@ -116,11 +116,14 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
     public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable) {
     }
 
+    /**
+     * 实体类注释.
+     */
     public void addModelClassComment(TopLevelClass topLevelClass,
             IntrospectedTable introspectedTable) {
         topLevelClass.addJavaDocLine("/**");
-        topLevelClass.addJavaDocLine(" * @author ");
         topLevelClass.addJavaDocLine(" * " + introspectedTable.getRemarks());
+        topLevelClass.addJavaDocLine(" * @author ");
         topLevelClass.addJavaDocLine(" */");
         if (isAnnotations) {
             topLevelClass.addAnnotation("@Table(name=\""
@@ -135,10 +138,7 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
             IntrospectedColumn introspectedColumn) {
         if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
             field.addJavaDocLine("/**");
-            StringBuilder sb = new StringBuilder();
-            sb.append(" * ");
-            sb.append(introspectedColumn.getRemarks());
-            field.addJavaDocLine(sb.toString());
+            field.addJavaDocLine(" * " + introspectedTable.getRemarks());
             field.addJavaDocLine(" */");
         }
 

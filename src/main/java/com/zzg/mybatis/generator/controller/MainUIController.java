@@ -523,7 +523,7 @@ public class MainUIController extends BaseFXController {
         jsr310Support.setSelected(generatorConfig.isJsr310Support());
 
         // 应用配置时, 自动填充过滤文本框
-        filterTreeBox.setText(generatorConfig.getTableName());
+        // filterTreeBox.setText(generatorConfig.getTableName());
     }
 
     @FXML
