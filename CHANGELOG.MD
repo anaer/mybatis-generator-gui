@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 20221213
+
+1. 升级logback版本 -> 1.3.5, slf4j -> 2.0.6
+2. 调整保存配置对话框 输入框宽度
+
 ## 20220608
 
 1. 去除 itfsw 依赖, 自实现 BatchInsertPlugin, 主要是 enableSelective 及 ModelColumnPlugin 基本没使用到, 后续有需要再进行调整

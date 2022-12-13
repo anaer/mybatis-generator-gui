@@ -431,12 +431,13 @@ public class MainUIController extends BaseFXController {
         }
 
         TextInputDialog dialog = new TextInputDialog(defaultName);
-        dialog.setTitle("保存当前配置");
+        dialog.setTitle("确认");
+        dialog.setHeaderText("保存当前配置");
         dialog.setContentText("请输入配置名称");
 
-        // 如果存在默认值, 则计算文本框长度, 6.5 相对较合适
+        // 如果存在默认值, 则计算文本框长度, 6.7 暂时适用
         if (StrUtil.isNotBlank(defaultName)) {
-            int prefWidth = (int) (StrUtil.length(defaultName) * 6.5);
+            int prefWidth = (int) (StrUtil.length(defaultName) * 6.7);
             dialog.getEditor().setPrefWidth(prefWidth);
         }
         Optional<String> result = dialog.showAndWait();
