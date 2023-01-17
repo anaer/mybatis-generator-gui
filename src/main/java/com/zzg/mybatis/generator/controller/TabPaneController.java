@@ -4,11 +4,12 @@ import com.jcraft.jsch.Session;
 import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.util.DbUtil;
 import com.zzg.mybatis.generator.view.AlertUtil;
+
+import cn.hutool.core.util.StrUtil;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,7 +60,7 @@ public class TabPaneController extends BaseFXController {
     public void setConfig(DatabaseConfig selectedConfig) {
         tabControlAController.setConfig(selectedConfig);
         tabControlBController.setDbConnectionConfig(selectedConfig);
-        if (StringUtils.isNoneBlank(
+        if (StrUtil.isAllNotBlank(
                 selectedConfig.getSshHost(),
                 selectedConfig.getSshPassword(),
                 selectedConfig.getSshPort(),
@@ -94,7 +95,7 @@ public class TabPaneController extends BaseFXController {
         if (config == null) {
             return;
         }
-        if (StringUtils.isAnyEmpty(config.getName(),
+        if (!StrUtil.isAllNotBlank(config.getName(),
                 config.getHost(),
                 config.getPort(),
                 config.getUsername(),

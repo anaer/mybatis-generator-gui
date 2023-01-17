@@ -1,4 +1,8 @@
 # CHANGELOG
+## 20230116
+
+1. 去除依赖commons-lang3, commons-io, commons-beanutils, 使用hutool替代
+2. AlertUtil提取公共方法
 
 ## 20221213
 

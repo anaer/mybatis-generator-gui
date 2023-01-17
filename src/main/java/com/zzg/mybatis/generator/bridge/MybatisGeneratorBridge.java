@@ -1,7 +1,7 @@
 package com.zzg.mybatis.generator.bridge;
 
 import cn.hutool.core.util.ClassUtil;
-
+import cn.hutool.core.util.StrUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,7 +22,6 @@ import com.zzg.mybatis.generator.plugins.RepositoryPlugin;
 import com.zzg.mybatis.generator.util.ConfigHelper;
 import com.zzg.mybatis.generator.util.DbUtil;
 
-import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.ProgressCallback;
@@ -140,7 +139,7 @@ public class MybatisGeneratorBridge {
         }
 
         //添加GeneratedKey主键生成
-        if (StringUtils.isNotEmpty(generatorConfig.getGenerateKeys())) {
+        if (StrUtil.isNotEmpty(generatorConfig.getGenerateKeys())) {
             String dbType2 = dbType;
             if (DbType.MySQL.name().equals(dbType2) || DbType.MySQL_8.name().equals(dbType)) {
                 dbType2 = "JDBC";
@@ -317,10 +316,10 @@ public class MybatisGeneratorBridge {
         sb.append(generatorConfig.getProjectFolder()).append("/");
         sb.append(generatorConfig.getMappingXMLTargetFolder()).append("/");
         String mappingXMLPackage = generatorConfig.getMappingXMLPackage();
-        if (StringUtils.isNotEmpty(mappingXMLPackage)) {
+        if (StrUtil.isNotEmpty(mappingXMLPackage)) {
             sb.append(mappingXMLPackage.replace(".", "/")).append("/");
         }
-        if (StringUtils.isNotEmpty(generatorConfig.getMapperName())) {
+        if (StrUtil.isNotEmpty(generatorConfig.getMapperName())) {
             sb.append(generatorConfig.getMapperName()).append(".xml");
         } else {
             sb.append(generatorConfig.getDomainObjectName()).append("Mapper.xml");

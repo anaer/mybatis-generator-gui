@@ -1,5 +1,7 @@
 package com.zzg.mybatis.generator.controller;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import com.zzg.mybatis.generator.model.UITableColumnVO;
 import com.zzg.mybatis.generator.view.AlertUtil;
 import javafx.collections.ObservableList;
@@ -7,8 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.internal.util.JavaBeansUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,9 +73,10 @@ public class TableColumnConfigsController extends BaseFXController {
 
 	private void genPropertyNameByColumnNamePrefix() {
 		String columnNamePrefix = this.columnNamePrefixTextLabel.getText();
-		if (StringUtils.isNotBlank(columnNamePrefix)) {
-			if (StringUtils.endsWith(columnNamePrefix.trim(), OR_REGEX)) {
-				columnNamePrefix = StringUtils.removeEnd(columnNamePrefix.trim(), OR_REGEX);
+		if (StrUtil.isNotBlank(columnNamePrefix)) {
+			if (StrUtil.endWith(columnNamePrefix.trim(), OR_REGEX)) {
+				columnNamePrefix = StrUtil.removeSuffix(columnNamePrefix.trim(), OR_REGEX);
+				
 			}
 
 			String regex = String.format(COL_NAME_PREFIX_REGEX, columnNamePrefix);
@@ -84,18 +85,18 @@ public class TableColumnConfigsController extends BaseFXController {
 			Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 
 			ObservableList<UITableColumnVO> items = columnListView.getItems();
-			if (CollectionUtils.isNotEmpty(items)) {
+			if (CollUtil.isNotEmpty(items)) {
 				items.stream().forEach(item -> {
 					String  columnName = item.getColumnName();
 					Matcher matcher    = pattern.matcher(columnName);
 					if (matcher.find()) {
 						// use first match result
 						String regexColumnName = matcher.group();
-						if (StringUtils.isNotBlank(regexColumnName)) {
+						if (StrUtil.isNotBlank(regexColumnName)) {
 							String propertyName = JavaBeansUtil.getCamelCaseString(regexColumnName, false);
 							_LOG.debug("table:{} column_name:{} regex_column_name:{} property_name:{}", tableName, columnName, regexColumnName, propertyName);
 
-							if (StringUtils.isNotBlank(propertyName)) item.setPropertyName(propertyName);
+							if (StrUtil.isNotBlank(propertyName)) item.setPropertyName(propertyName);
 						} else {
 							_LOG.warn("table:{} column_name:{} regex_column_name is blank", tableName, columnName);
 						}

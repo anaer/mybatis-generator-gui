@@ -1,7 +1,8 @@
 package com.zzg.mybatis.generator.util;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ReUtil;
-
+import cn.hutool.core.util.StrUtil;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.Driver;
@@ -31,8 +32,6 @@ import com.zzg.mybatis.generator.model.DbType;
 import com.zzg.mybatis.generator.model.UITableColumnVO;
 import com.zzg.mybatis.generator.view.AlertUtil;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.mybatis.generator.internal.util.ClassloaderUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,11 +51,9 @@ public class DbUtil {
 	private static Map<Integer, Session> portForwardingSession = new ConcurrentHashMap<>();
 
     public static Session getSSHSession(DatabaseConfig databaseConfig) {
-		if (StringUtils.isBlank(databaseConfig.getSshHost())
-				|| StringUtils.isBlank(databaseConfig.getSshPort())
-				|| StringUtils.isBlank(databaseConfig.getSshUser())
-				|| (StringUtils.isBlank(databaseConfig.getPrivateKey()) && StringUtils.isBlank(databaseConfig.getSshPassword()))
-		) {
+		if (!StrUtil.isAllNotBlank(databaseConfig.getSshHost(), databaseConfig.getSshPort(), databaseConfig.getSshUser(), databaseConfig.getPrivateKey()) 
+		  && StrUtil.isBlank(databaseConfig.getSshPassword()))
+	    {
 			return null;
 		}
 
@@ -66,12 +63,12 @@ public class DbUtil {
 			java.util.Properties config = new java.util.Properties();
 			config.put("StrictHostKeyChecking", "no");
 			JSch jsch = new JSch();
-			Integer sshPort = NumberUtils.createInteger(databaseConfig.getSshPort());
+			Integer sshPort = Convert.toInt(databaseConfig.getSshPort());
 			int port = sshPort == null ? 22 : sshPort;
 			session = jsch.getSession(databaseConfig.getSshUser(), databaseConfig.getSshHost(), port);
-			if (StringUtils.isNotBlank(databaseConfig.getPrivateKey())) {
+			if (StrUtil.isNotBlank(databaseConfig.getPrivateKey())) {
 				//使用秘钥方式认证
-				jsch.addIdentity(databaseConfig.getPrivateKey(), StringUtils.defaultIfBlank(databaseConfig.getPrivateKeyPassword(), null));
+				jsch.addIdentity(databaseConfig.getPrivateKey(), StrUtil.blankToDefault(databaseConfig.getPrivateKeyPassword(), null));
 			}else {
 				session.setPassword(databaseConfig.getSshPassword());
 			}
@@ -87,14 +84,14 @@ public class DbUtil {
 			AtomicInteger assigned_port = new AtomicInteger();
 			Future<?> result = executorService.submit(() -> {
 				try {
-					Integer localPort = NumberUtils.createInteger(config.getLport());
-					Integer RemotePort = NumberUtils.createInteger(config.getRport());
+					Integer localPort = Convert.toInt(config.getLport());
+					Integer RemotePort = Convert.toInt(config.getRport());
 					int lport = localPort == null ? Integer.parseInt(config.getPort()) : localPort;
 					int rport = RemotePort == null ? Integer.parseInt(config.getPort()) : RemotePort;
 					Session session = portForwardingSession.get(lport);
 					if (session != null && session.isConnected()) {
 						String s = session.getPortForwardingL()[0];
-						String[] split = StringUtils.split(s, ":");
+						String[] split = StrUtil.splitToArray(s, ":");
 						boolean portForwarding = String.format("%s:%s", split[0], split[1]).equals(lport + ":" + config.getHost());
 						if (portForwarding) {
 							return;
@@ -185,7 +182,7 @@ public class DbUtil {
 			while (rs.next()) {
 				tables.add(rs.getString(3));
 			}
-			if (StringUtils.isNotBlank(filter)) {
+			if (StrUtil.isNotBlank(filter)) {
 				tables.removeIf(x -> !x.contains(filter) && !(x.replaceAll("_", "").contains(filter)));;
 			}
 

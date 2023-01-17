@@ -1,5 +1,7 @@
 package com.zzg.mybatis.generator.controller;
 
+import cn.hutool.core.exceptions.ExceptionUtil;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 
 import java.awt.Desktop;
@@ -23,9 +25,6 @@ import com.zzg.mybatis.generator.util.MyStringUtils;
 import com.zzg.mybatis.generator.view.AlertUtil;
 import com.zzg.mybatis.generator.view.UIProgressCallback;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.mybatis.generator.config.ColumnOverride;
 import org.mybatis.generator.config.IgnoredColumn;
 import org.slf4j.Logger;
@@ -272,10 +271,10 @@ public class MainUIController extends BaseFXController {
                     newTreeItem.setValue(tableName);
                     children.add(newTreeItem);
                 }
-            } else if (StringUtils.isNotBlank(filter)) {
+            } else if (StrUtil.isNotBlank(filter)) {
                 treeItem.getChildren().clear();
             }
-            if (StringUtils.isNotBlank(filter)) {
+            if (StrUtil.isNotBlank(filter)) {
                 ImageView imageView = new ImageView("icons/filter.png");
                 imageView.setFitHeight(16);
                 imageView.setFitWidth(16);
@@ -329,7 +328,7 @@ public class MainUIController extends BaseFXController {
             }
         } catch (Exception e) {
             _LOG.error("connect db failed, reason", e);
-            AlertUtil.showErrorAlert(e.getMessage() + "\n" + ExceptionUtils.getStackTrace(e));
+            AlertUtil.showErrorAlert(e.getMessage() + "\n" + ExceptionUtil.getRootCauseMessage(e));
         }
     }
 
@@ -409,13 +408,13 @@ public class MainUIController extends BaseFXController {
 
     private String validateConfig() {
         String projectFolder = projectFolderField.getText();
-        if (StringUtils.isEmpty(projectFolder)) {
+        if (StrUtil.isEmpty(projectFolder)) {
             return "项目目录不能为空";
         }
-        if (StringUtils.isEmpty(domainObjectNameField.getText())) {
+        if (StrUtil.isEmpty(domainObjectNameField.getText())) {
             return "类名不能为空";
         }
-        if (StringUtils.isAnyEmpty(modelTargetPackage.getText(), mapperTargetPackage.getText(),
+        if (!StrUtil.isAllNotBlank(modelTargetPackage.getText(), mapperTargetPackage.getText(),
                 daoTargetPackage.getText())) {
             return "包名不能为空";
         }
@@ -443,7 +442,7 @@ public class MainUIController extends BaseFXController {
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             String name = result.get();
-            if (StringUtils.isEmpty(name)) {
+            if (StrUtil.isEmpty(name)) {
                 AlertUtil.showErrorAlert("名称不能为空");
                 return;
             }
@@ -584,7 +583,7 @@ public class MainUIController extends BaseFXController {
                 if (ButtonType.OK == optional.get()) {
                     try {
                         for (String dir : dirs) {
-                            FileUtils.forceMkdir(new File(dir));
+                            FileUtil.mkdir(dir);
                         }
                         return true;
                     } catch (Exception e) {
