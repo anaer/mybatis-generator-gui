@@ -1,4 +1,9 @@
 # CHANGELOG
+
+## 20230130
+
+1. 左侧连接管理栏添加右键菜单`复制连接`, 复制当前选中的连接进行编辑, 保存时新增记录.
+
 ## 20230116
 
 1. 去除依赖commons-lang3, commons-io, commons-beanutils, 使用hutool替代

@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.model.DbType;
@@ -104,7 +105,7 @@ public class ConfigHelper {
 			}
 			String jsonStr = JSONUtil.toJsonStr(dbConfig);
 			String sql;
-			if (isUpdate) {
+			if (isUpdate && Objects.nonNull(primaryKey)) {
 				sql = String.format("UPDATE dbs SET name = '%s', value = '%s' where id = %d", configName, jsonStr, primaryKey);
 			} else {
 				sql = String.format("INSERT INTO dbs (name, value) values('%s', '%s')", configName, jsonStr);

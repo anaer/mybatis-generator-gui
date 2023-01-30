@@ -220,7 +220,19 @@ public class MainUIController extends BaseFXController {
                             AlertUtil.showErrorAlert("Delete connection failed! Reason: " + e.getMessage());
                         }
                     });
-                    contextMenu.getItems().addAll(item1, item2, item3);
+                    MenuItem item4 = new MenuItem("复制连接");
+                    item4.setOnAction(event1 -> {
+                        DatabaseConfig selectedConfig = (DatabaseConfig) treeItem.getGraphic().getUserData();
+                        TabPaneController controller = (TabPaneController) loadFXMLPage("编辑数据库连接",
+                                FXMLPage.NEW_CONNECTION, false);
+
+                        selectedConfig.setId(null);
+                        selectedConfig.setName(selectedConfig.getName() + " Copy");
+                        controller.setMainUIController(this);
+                        controller.setConfig(selectedConfig);
+                        controller.showDialogStage();
+                    });
+                    contextMenu.getItems().addAll(item1, item2, item4, item3);
                     cell.setContextMenu(contextMenu);
                 }
                 if (event.getClickCount() == 2) {
