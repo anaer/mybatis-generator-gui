@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 20230720
+
+1. 升级hutool -> 5.8.20, slf4j -> 2.0.7
+2. 调整DbRemarksComment注释生成, 未勾选时 注释与默认保持一致 (兼容其他生成器)
+
 ## 20230307
 
 1. pom.xml提取version到properties

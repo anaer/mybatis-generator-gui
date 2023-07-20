@@ -10,17 +10,17 @@
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!-- Java 11请修改此处为11 -->
         <java.version>1.8</java.version>
-        <!-- 
+        <!--
              根据jdk版本选择logback版本
              1.3.x java8
              1.4.x java11
         -->
         <logback.version>1.3.5</logback.version>
-        <hutool-all.version>5.8.14</hutool-all.version>
-        <mybatis-generator-core.version>1.4.2</mybatis-generator-core.version> 
+        <hutool-all.version>5.8.20</hutool-all.version>
+        <mybatis-generator-core.version>1.4.2</mybatis-generator-core.version>
         <sqlite-jdbc.version>3.36.0</sqlite-jdbc.version>
         <junit.version>4.13.2</junit.version>
-        <slf4j-api.version>2.0.6</slf4j-api.version>
+        <slf4j-api.version>2.0.7</slf4j-api.version>
         <jsch.version>0.1.55</jsch.version>
     </properties>
 
