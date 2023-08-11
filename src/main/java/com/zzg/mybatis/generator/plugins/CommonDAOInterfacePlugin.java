@@ -28,7 +28,7 @@ public class CommonDAOInterfacePlugin extends PluginAdapter {
     public CommonDAOInterfacePlugin() {
         shellCallback = new DefaultShellCallback(false);
     }
-    
+
     private boolean isUseExample() {
         return "true"
                 .equals(context.getJavaClientGeneratorConfiguration().getProperty("useExample"));
@@ -37,7 +37,6 @@ public class CommonDAOInterfacePlugin extends PluginAdapter {
 
     @Override
     public List<GeneratedJavaFile> contextGenerateAdditionalJavaFiles(IntrospectedTable introspectedTable) {
-        boolean hasPk = introspectedTable.hasPrimaryKeyColumns();
         JavaFormatter javaFormatter = context.getJavaFormatter();
         String daoTargetDir = context.getJavaClientGeneratorConfiguration().getTargetProject();
         String daoTargetPackage = context.getJavaClientGeneratorConfiguration().getTargetPackage();

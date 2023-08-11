@@ -36,13 +36,12 @@ public class TabPaneController extends BaseFXController {
 
     private boolean isOverssh;
 
-    private MainUIController mainUIController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tabPane.setPrefHeight(((AnchorPane) tabPane.getSelectionModel().getSelectedItem().getContent()).getPrefHeight());
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            isOverssh = observable.getValue().getText().equals("SSH");
+            isOverssh = "SSH".equals(observable.getValue().getText());
             tabPane.prefHeightProperty().bind(((AnchorPane) tabPane.getSelectionModel().getSelectedItem().getContent()).prefHeightProperty());
             getDialogStage().close();
             getDialogStage().show();
@@ -50,7 +49,6 @@ public class TabPaneController extends BaseFXController {
     }
 
     public void setMainUIController(MainUIController mainUIController) {
-        this.mainUIController = mainUIController;
         this.tabControlAController.setMainUIController(mainUIController);
         this.tabControlAController.setTabPaneController(this);
         this.tabControlBController.setMainUIController(mainUIController);
@@ -111,7 +109,7 @@ public class TabPaneController extends BaseFXController {
             pictureProcessState.setDialogStage(getDialogStage());
             pictureProcessState.startPlay();
             //如果不用异步，则视图会等方法返回才会显示
-            Task task = new Task<Void>() {
+            Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
                     DbUtil.engagePortForwarding(sshSession, config);
@@ -123,7 +121,7 @@ public class TabPaneController extends BaseFXController {
                 Throwable e = task.getException();
                 logger.error("task Failed", e);
                 if (e instanceof RuntimeException) {
-                    if (e.getMessage().equals("Address already in use: JVM_Bind")) {
+                    if ("Address already in use: JVM_Bind".equals(e.getMessage())) {
                         tabControlBController.setLPortLabelText(config.getLport() + "已经被占用，请换其他端口");
                     }
                     //端口转发一定不成功，导致数据库连接不上

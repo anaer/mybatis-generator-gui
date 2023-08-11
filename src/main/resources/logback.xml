@@ -3,7 +3,7 @@
 	<jmxConfigurator />
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>[%level] [%date{HH:mm:ss.SSS}] [%thread] [%mdc] %logger.%method:%line --> %message%n</pattern>
+			<pattern>[%level] [%date{HH:mm:ss.SSS}] [%thread] %logger:%line --> %method: %message%n</pattern>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>DEBUG</level>
@@ -22,7 +22,7 @@
 			</timeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
 		<encoder>
-			<pattern>[%level] [%date{HH:mm:ss.SSS}] [%thread] [%mdc] %logger.%method:%line --> %message%n</pattern>
+			<pattern>[%level] [%date{HH:mm:ss.SSS}] [%thread] %logger:%line --> %method: %message%n</pattern>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>DEBUG</level>

@@ -282,7 +282,15 @@ public class MainUIController extends BaseFXController {
                     newTreeItem.setGraphic(imageView);
                     newTreeItem.setValue(tableName);
                     children.add(newTreeItem);
+
+                    // 如果匹配结果只有一项时, 自动设置表名和当前选中数据库配置
+                    if(tables.size() == 1) {
+                        this.tableName = tableName;
+                        this.selectedDatabaseConfig = selectedConfig;
+                    }
                 }
+
+
             } else if (StrUtil.isNotBlank(filter)) {
                 treeItem.getChildren().clear();
             }
@@ -324,7 +332,7 @@ public class MainUIController extends BaseFXController {
     }
 
     void loadLeftDBTree() {
-        TreeItem rootTreeItem = leftDBTree.getRoot();
+        TreeItem<String> rootTreeItem = leftDBTree.getRoot();
         rootTreeItem.getChildren().clear();
         try {
             List<DatabaseConfig> dbConfigs = ConfigHelper.loadDatabaseConfig();
@@ -353,10 +361,21 @@ public class MainUIController extends BaseFXController {
         }
     }
 
-    @FXML
-    public void generateCode() {
+    /**
+     * 应用配置时, 检查是否选中数据库, 如果未选中 则进行提示.
+     * @return true: 已选择 false: 未选择, 可根据返回值判断是否执行后续操作.
+     */
+    public boolean checkDatabaseConfig(){
         if (tableName == null) {
             AlertUtil.showWarnAlert("请先在左侧选择数据库表");
+            return false;
+        }
+        return true;
+    }
+
+    @FXML
+    public void generateCode() {
+        if(!checkDatabaseConfig()){
             return;
         }
         String result = validateConfig();
@@ -392,7 +411,7 @@ public class MainUIController extends BaseFXController {
             bridge.generate();
 
             if (pictureProcessStateController != null) {
-                Task task = new Task<Void>() {
+                Task<Void> task = new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
                         Thread.sleep(3000);
@@ -535,13 +554,12 @@ public class MainUIController extends BaseFXController {
         jsr310Support.setSelected(generatorConfig.isJsr310Support());
 
         // 应用配置时, 自动填充过滤文本框
-        // filterTreeBox.setText(generatorConfig.getTableName());
+        filterTreeBox.setText(generatorConfig.getTableName());
     }
 
     @FXML
     public void openTableColumnCustomizationPage() {
-        if (tableName == null) {
-            AlertUtil.showWarnAlert("请先在左侧选择数据库表");
+        if(!checkDatabaseConfig()){
             return;
         }
         SelectTableColumnController controller = (SelectTableColumnController) loadFXMLPage("定制列",

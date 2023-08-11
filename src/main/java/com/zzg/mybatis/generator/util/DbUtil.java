@@ -51,7 +51,7 @@ public class DbUtil {
 	private static Map<Integer, Session> portForwardingSession = new ConcurrentHashMap<>();
 
     public static Session getSSHSession(DatabaseConfig databaseConfig) {
-		if (!StrUtil.isAllNotBlank(databaseConfig.getSshHost(), databaseConfig.getSshPort(), databaseConfig.getSshUser(), databaseConfig.getPrivateKey()) 
+		if (!StrUtil.isAllNotBlank(databaseConfig.getSshHost(), databaseConfig.getSshPort(), databaseConfig.getSshUser(), databaseConfig.getPrivateKey())
 		  && StrUtil.isBlank(databaseConfig.getSshPassword()))
 	    {
 			return null;
@@ -92,7 +92,7 @@ public class DbUtil {
 					if (session != null && session.isConnected()) {
 						String s = session.getPortForwardingL()[0];
 						String[] split = StrUtil.splitToArray(s, ":");
-						boolean portForwarding = String.format("%s:%s", split[0], split[1]).equals(lport + ":" + config.getHost());
+						boolean portForwarding = (lport + ":" + config.getHost()).equals(String.format("%s:%s", split[0], split[1]));
 						if (portForwarding) {
 							return;
 						}
@@ -104,7 +104,7 @@ public class DbUtil {
 					_LOG.info("portForwarding Enabled, {}", assigned_port);
 				} catch (JSchException e) {
 					_LOG.error("Connect Over SSH failed", e);
-					if (e.getCause() != null && e.getCause().getMessage().equals("Address already in use: JVM_Bind")) {
+					if (e.getCause() != null && "Address already in use: JVM_Bind".equals(e.getCause().getMessage())) {
 						throw new RuntimeException("Address already in use: JVM_Bind");
 					}
 					throw new RuntimeException(e.getMessage());
@@ -238,7 +238,7 @@ public class DbUtil {
 		List<String> driverJars = ConfigHelper.getAllJDBCDriverJarPaths();
 		ClassLoader classloader = ClassloaderUtility.getCustomClassloader(driverJars);
 		try {
-			Class clazz = Class.forName(dbType.getDriverClass(), true, classloader);
+			Class<?> clazz = Class.forName(dbType.getDriverClass(), true, classloader);
 			Driver driver = (Driver) clazz.newInstance();
 			_LOG.info("load driver class: {}", driver);
 			drivers.put(dbType, driver);

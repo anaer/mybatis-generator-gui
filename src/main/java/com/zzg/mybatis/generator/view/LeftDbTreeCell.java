@@ -6,7 +6,6 @@ import javafx.beans.Observable;
 import javafx.beans.WeakInvalidationListener;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
-import javafx.scene.layout.HBox;
 
 import java.lang.ref.WeakReference;
 
@@ -14,7 +13,6 @@ import java.lang.ref.WeakReference;
  * Created by Owen on 6/14/16.
  */
 public class LeftDbTreeCell extends TreeCell<DatabaseConfig> {
-    private HBox hbox;
 
     private WeakReference<TreeItem<DatabaseConfig>> treeItemRef;
 
@@ -54,18 +52,15 @@ public class LeftDbTreeCell extends TreeCell<DatabaseConfig> {
 
     void updateDisplay(DatabaseConfig item, boolean empty) {
         if (item == null || empty) {
-            hbox = null;
             setText(null);
             setGraphic(null);
         } else {
             // update the graphic if one is set in the TreeItem
             TreeItem<DatabaseConfig> treeItem = getTreeItem();
             if (treeItem != null && treeItem.getGraphic() != null) {
-                hbox = null;
                 setText(item.toString());
                 setGraphic(treeItem.getGraphic());
             } else {
-                hbox = null;
                 setText(item.getName());
                 setGraphic(null);
             }

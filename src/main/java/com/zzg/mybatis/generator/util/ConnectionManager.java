@@ -1,5 +1,6 @@
 package com.zzg.mybatis.generator.util;
 
+import cn.hutool.core.io.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +18,7 @@ public class ConnectionManager {
     public static Connection getConnection() throws Exception {
         Class.forName("org.sqlite.JDBC");
         File file = new File(DB_URL.substring("jdbc:sqlite:".length())).getAbsoluteFile();
-        _LOG.info("database FilePath :{}", file.getAbsolutePath());
+        _LOG.info("database FilePath :{}", FileUtil.normalize(file.getAbsolutePath()));
         Connection conn = DriverManager.getConnection(DB_URL);
         return conn;
     }

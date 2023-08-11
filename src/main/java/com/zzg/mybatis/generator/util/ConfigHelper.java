@@ -1,11 +1,13 @@
 package com.zzg.mybatis.generator.util;
 
 import cn.hutool.json.JSONUtil;
+import com.zzg.mybatis.generator.model.DatabaseConfig;
+import com.zzg.mybatis.generator.model.DbType;
+import com.zzg.mybatis.generator.model.GeneratorConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
@@ -15,13 +17,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import com.zzg.mybatis.generator.model.DatabaseConfig;
-import com.zzg.mybatis.generator.model.DbType;
-import com.zzg.mybatis.generator.model.GeneratorConfig;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * XML based config file help class
@@ -57,8 +52,10 @@ public class ConfigHelper {
 				fos.write(buffer, 0, byteread);
 			}
 		} finally {
-			if (fis != null) fis.close();
-			if (fos != null) fos.close();
+			if (fis != null)
+				fis.close();
+			if (fos != null)
+				fos.close();
 		}
 
 	}
@@ -83,9 +80,12 @@ public class ConfigHelper {
 
 			return configs;
 		} finally {
-			if (rs != null) rs.close();
-			if (stat != null) stat.close();
-			if (conn != null) conn.close();
+			if (rs != null)
+				rs.close();
+			if (stat != null)
+				stat.close();
+			if (conn != null)
+				conn.close();
 		}
 	}
 
@@ -98,8 +98,8 @@ public class ConfigHelper {
 			conn = ConnectionManager.getConnection();
 			stat = conn.createStatement();
 			if (!isUpdate) {
-				ResultSet rs1 = stat.executeQuery("SELECT * from dbs where name = '" + configName + "'");
-				if (rs1.next()) {
+				rs = stat.executeQuery("SELECT * from dbs where name = '" + configName + "'");
+				if (rs.next()) {
 					throw new RuntimeException("配置已经存在, 请使用其它名字");
 				}
 			}
@@ -112,9 +112,12 @@ public class ConfigHelper {
 			}
 			stat.executeUpdate(sql);
 		} finally {
-			if (rs != null) rs.close();
-			if (stat != null) stat.close();
-			if (conn != null) conn.close();
+			if (rs != null)
+				rs.close();
+			if (stat != null)
+				stat.close();
+			if (conn != null)
+				conn.close();
 		}
 	}
 
@@ -128,9 +131,12 @@ public class ConfigHelper {
 			String sql = String.format("delete from dbs where id=%d", databaseConfig.getId());
 			stat.executeUpdate(sql);
 		} finally {
-			if (rs != null) rs.close();
-			if (stat != null) stat.close();
-			if (conn != null) conn.close();
+			if (rs != null)
+				rs.close();
+			if (stat != null)
+				stat.close();
+			if (conn != null)
+				conn.close();
 		}
 	}
 
@@ -142,13 +148,15 @@ public class ConfigHelper {
 			conn = ConnectionManager.getConnection();
 			stat = conn.createStatement();
 			String jsonStr = JSONUtil.toJsonStr(generatorConfig);
-			String sql = String.format("INSERT INTO generator_config values('%s', '%s')", generatorConfig.getName(),
-					jsonStr);
+			String sql = String.format("INSERT INTO generator_config values('%s', '%s')", generatorConfig.getName(), jsonStr);
 			stat.executeUpdate(sql);
 		} finally {
-			if (rs != null) rs.close();
-			if (stat != null) stat.close();
-			if (conn != null) conn.close();
+			if (rs != null)
+				rs.close();
+			if (stat != null)
+				stat.close();
+			if (conn != null)
+				conn.close();
 		}
 	}
 
@@ -169,9 +177,12 @@ public class ConfigHelper {
 			}
 			return generatorConfig;
 		} finally {
-			if (rs != null) rs.close();
-			if (stat != null) stat.close();
-			if (conn != null) conn.close();
+			if (rs != null)
+				rs.close();
+			if (stat != null)
+				stat.close();
+			if (conn != null)
+				conn.close();
 		}
 	}
 
@@ -192,9 +203,12 @@ public class ConfigHelper {
 			}
 			return configs;
 		} finally {
-			if (rs != null) rs.close();
-			if (stat != null) stat.close();
-			if (conn != null) conn.close();
+			if (rs != null)
+				rs.close();
+			if (stat != null)
+				stat.close();
+			if (conn != null)
+				conn.close();
 		}
 	}
 
@@ -208,8 +222,10 @@ public class ConfigHelper {
 			_LOG.info("sql: {}", sql);
 			return stat.executeUpdate(sql);
 		} finally {
-			if (stat != null) stat.close();
-			if (conn != null) conn.close();
+			if (stat != null)
+				stat.close();
+			if (conn != null)
+				conn.close();
 		}
 	}
 
@@ -254,6 +270,5 @@ public class ConfigHelper {
 		}
 		return jarFilePathList;
 	}
-
 
 }
