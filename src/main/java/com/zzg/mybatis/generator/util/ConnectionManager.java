@@ -1,6 +1,6 @@
 package com.zzg.mybatis.generator.util;
 
-import cn.hutool.core.io.FileUtil;
+import org.dromara.hutool.core.io.file.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

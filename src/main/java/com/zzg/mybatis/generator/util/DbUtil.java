@@ -1,28 +1,5 @@
 package com.zzg.mybatis.generator.util;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.ReUtil;
-import cn.hutool.core.util.StrUtil;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -31,10 +8,19 @@ import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.model.DbType;
 import com.zzg.mybatis.generator.model.UITableColumnVO;
 import com.zzg.mybatis.generator.view.AlertUtil;
-
+import org.dromara.hutool.core.array.ArrayUtil;
+import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.regex.ReUtil;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.core.text.split.SplitUtil;
 import org.mybatis.generator.internal.util.ClassloaderUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.sql.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by Owen on 6/12/16.
@@ -51,7 +37,7 @@ public class DbUtil {
 	private static Map<Integer, Session> portForwardingSession = new ConcurrentHashMap<>();
 
     public static Session getSSHSession(DatabaseConfig databaseConfig) {
-		if (!StrUtil.isAllNotBlank(databaseConfig.getSshHost(), databaseConfig.getSshPort(), databaseConfig.getSshUser(), databaseConfig.getPrivateKey())
+		if (!ArrayUtil.isAllNotBlank(databaseConfig.getSshHost(), databaseConfig.getSshPort(), databaseConfig.getSshUser(), databaseConfig.getPrivateKey())
 		  && StrUtil.isBlank(databaseConfig.getSshPassword()))
 	    {
 			return null;
@@ -68,7 +54,7 @@ public class DbUtil {
 			session = jsch.getSession(databaseConfig.getSshUser(), databaseConfig.getSshHost(), port);
 			if (StrUtil.isNotBlank(databaseConfig.getPrivateKey())) {
 				//使用秘钥方式认证
-				jsch.addIdentity(databaseConfig.getPrivateKey(), StrUtil.blankToDefault(databaseConfig.getPrivateKeyPassword(), null));
+				jsch.addIdentity(databaseConfig.getPrivateKey(), StrUtil.defaultIfBlank(databaseConfig.getPrivateKeyPassword(), null));
 			}else {
 				session.setPassword(databaseConfig.getSshPassword());
 			}
@@ -91,7 +77,7 @@ public class DbUtil {
 					Session session = portForwardingSession.get(lport);
 					if (session != null && session.isConnected()) {
 						String s = session.getPortForwardingL()[0];
-						String[] split = StrUtil.splitToArray(s, ":");
+						String[] split = SplitUtil.splitToArray(s, ":");
 						boolean portForwarding = (lport + ":" + config.getHost()).equals(String.format("%s:%s", split[0], split[1]));
 						if (portForwarding) {
 							return;

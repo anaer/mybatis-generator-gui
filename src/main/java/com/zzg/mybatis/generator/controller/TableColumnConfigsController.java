@@ -1,7 +1,5 @@
 package com.zzg.mybatis.generator.controller;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
 import com.zzg.mybatis.generator.model.UITableColumnVO;
 import com.zzg.mybatis.generator.view.AlertUtil;
 import javafx.collections.ObservableList;
@@ -9,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.text.StrUtil;
 import org.mybatis.generator.internal.util.JavaBeansUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

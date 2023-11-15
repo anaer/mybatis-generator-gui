@@ -1,9 +1,9 @@
 package com.zzg.mybatis.generator.util;
 
-import cn.hutool.json.JSONUtil;
 import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.model.DbType;
 import com.zzg.mybatis.generator.model.GeneratorConfig;
+import org.dromara.hutool.json.JSONUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

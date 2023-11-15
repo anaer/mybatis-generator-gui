@@ -6,17 +6,14 @@ import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.util.ConfigHelper;
 import com.zzg.mybatis.generator.util.DbUtil;
 import com.zzg.mybatis.generator.view.AlertUtil;
-
-import cn.hutool.core.util.StrUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
+import org.dromara.hutool.core.array.ArrayUtil;
+import org.dromara.hutool.core.text.StrUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -127,8 +124,8 @@ public class OverSshController extends DbConnectionController {
     @FXML
     public void checkInput() {
         DatabaseConfig databaseConfig = extractConfigFromUi();
-        if (authTypeChoice.getValue().equals("Password") && (!StrUtil.isAllNotBlank(databaseConfig.getSshHost(), databaseConfig.getSshPort(), databaseConfig.getSshUser(), databaseConfig.getSshPassword()))
-            || authTypeChoice.getValue().equals("PubKey") && ( !StrUtil.isAllNotBlank(databaseConfig.getSshHost(), databaseConfig.getSshPort(), databaseConfig.getSshUser(), databaseConfig.getPrivateKey()))
+        if (authTypeChoice.getValue().equals("Password") && (!ArrayUtil.isAllNotBlank(databaseConfig.getSshHost(), databaseConfig.getSshPort(), databaseConfig.getSshUser(), databaseConfig.getSshPassword()))
+            || authTypeChoice.getValue().equals("PubKey") && ( !ArrayUtil.isAllNotBlank(databaseConfig.getSshHost(), databaseConfig.getSshPort(), databaseConfig.getSshUser(), databaseConfig.getPrivateKey()))
         ) {
             note.setText("当前SSH配置输入不完整，OVER SSH不生效");
             note.setTextFill(Paint.valueOf("#ff666f"));
@@ -180,7 +177,7 @@ public class OverSshController extends DbConnectionController {
 
     public void saveConfig() {
         DatabaseConfig databaseConfig = extractConfigFromUi();
-        if (!StrUtil.isAllNotBlank(
+        if (!ArrayUtil.isAllNotBlank(
                 databaseConfig.getName(),
                 databaseConfig.getHost(),
                 databaseConfig.getPort(),

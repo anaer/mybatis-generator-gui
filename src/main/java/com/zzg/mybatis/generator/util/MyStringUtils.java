@@ -1,8 +1,8 @@
 package com.zzg.mybatis.generator.util;
 
-import cn.hutool.core.text.NamingCase;
-import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutool.core.array.ArrayUtil;
+import org.dromara.hutool.core.text.NamingCase;
+import org.dromara.hutool.core.text.StrUtil;
 
 /**
  * Created by Owen on 6/18/16.

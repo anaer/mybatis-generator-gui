@@ -1,28 +1,22 @@
 package com.zzg.mybatis.generator.controller;
 
-import cn.hutool.core.collection.CollUtil;
+import com.zzg.mybatis.generator.model.GeneratorConfig;
+import com.zzg.mybatis.generator.util.ConfigHelper;
+import com.zzg.mybatis.generator.view.AlertUtil;
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-
-import com.zzg.mybatis.generator.model.GeneratorConfig;
-import com.zzg.mybatis.generator.util.ConfigHelper;
-import com.zzg.mybatis.generator.view.AlertUtil;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 
 /**
  * 管理GeneratorConfig的Controller

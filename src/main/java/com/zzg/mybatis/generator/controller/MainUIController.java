@@ -1,19 +1,5 @@
 package com.zzg.mybatis.generator.controller;
 
-import cn.hutool.core.exceptions.ExceptionUtil;
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.StrUtil;
-
-import java.awt.Desktop;
-import java.io.File;
-import java.net.URL;
-import java.sql.SQLRecoverableException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
-
 import com.jcraft.jsch.Session;
 import com.zzg.mybatis.generator.bridge.MybatisGeneratorBridge;
 import com.zzg.mybatis.generator.model.DatabaseConfig;
@@ -24,29 +10,11 @@ import com.zzg.mybatis.generator.util.DbUtil;
 import com.zzg.mybatis.generator.util.MyStringUtils;
 import com.zzg.mybatis.generator.view.AlertUtil;
 import com.zzg.mybatis.generator.view.UIProgressCallback;
-
-import org.mybatis.generator.config.ColumnOverride;
-import org.mybatis.generator.config.IgnoredColumn;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.Tooltip;
-import javafx.scene.control.TreeCell;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -54,6 +22,20 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.util.Callback;
+import org.dromara.hutool.core.array.ArrayUtil;
+import org.dromara.hutool.core.exception.ExceptionUtil;
+import org.dromara.hutool.core.io.file.FileUtil;
+import org.dromara.hutool.core.text.StrUtil;
+import org.mybatis.generator.config.ColumnOverride;
+import org.mybatis.generator.config.IgnoredColumn;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.awt.Desktop;
+import java.io.File;
+import java.net.URL;
+import java.sql.SQLRecoverableException;
+import java.util.*;
 
 public class MainUIController extends BaseFXController {
 
@@ -243,12 +225,24 @@ public class MainUIController extends BaseFXController {
                     if (level == 1) {
                         displayTables(treeItem);
                     } else if (level == 2) { // left DB tree level3
+                        // 选中表
                         String tableName = treeCell.getTreeItem().getValue();
                         selectedDatabaseConfig = (DatabaseConfig) treeItem.getParent().getGraphic().getUserData();
                         this.tableName = tableName;
                         tableNameField.setText(tableName);
                         domainObjectNameField.setText(MyStringUtils.dbStringToCamelStyle(tableName));
                         mapperName.setText(domainObjectNameField.getText().concat(MAPPER_SUFFIX));
+
+                        // 选中表时 检查是否存在匹配的配置, 如果存在则应用
+                        try {
+                            String configName = String.format("%s.%s", selectedDatabaseConfig.getSchema(), tableNameField.getText());
+                            GeneratorConfig generatorConfig = ConfigHelper.loadGeneratorConfig(configName);
+                            if (Objects.nonNull(generatorConfig)) {
+                                setGeneratorConfigIntoUI(generatorConfig);
+                            }
+                        } catch (Exception ignore) {
+                            _LOG.warn("默认应用配置异常:{}", ignore.getMessage());
+                        }
                     }
                 }
             });
@@ -445,7 +439,7 @@ public class MainUIController extends BaseFXController {
         if (StrUtil.isEmpty(domainObjectNameField.getText())) {
             return "类名不能为空";
         }
-        if (!StrUtil.isAllNotBlank(modelTargetPackage.getText(), mapperTargetPackage.getText(),
+        if (!ArrayUtil.isAllNotBlank(modelTargetPackage.getText(), mapperTargetPackage.getText(),
                 daoTargetPackage.getText())) {
             return "包名不能为空";
         }
@@ -554,7 +548,7 @@ public class MainUIController extends BaseFXController {
         jsr310Support.setSelected(generatorConfig.isJsr310Support());
 
         // 应用配置时, 自动填充过滤文本框
-        filterTreeBox.setText(generatorConfig.getTableName());
+        // filterTreeBox.setText(generatorConfig.getTableName());
     }
 
     @FXML

@@ -3,11 +3,10 @@ package com.zzg.mybatis.generator.controller;
 import com.zzg.mybatis.generator.model.DatabaseConfig;
 import com.zzg.mybatis.generator.util.ConfigHelper;
 import com.zzg.mybatis.generator.view.AlertUtil;
-
-import cn.hutool.core.util.StrUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import org.dromara.hutool.core.array.ArrayUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,7 +84,7 @@ public class DbConnectionController extends BaseFXController {
         config.setPassword(password);
         config.setSchema(schema);
         config.setEncoding(encoding);
-        if (!StrUtil.isAllNotBlank(name, host, port, userName, encoding, dbType, schema)) {
+        if (!ArrayUtil.isAllNotBlank(name, host, port, userName, encoding, dbType, schema)) {
             AlertUtil.showWarnAlert("密码以外其他字段必填");
             return null;
         }
