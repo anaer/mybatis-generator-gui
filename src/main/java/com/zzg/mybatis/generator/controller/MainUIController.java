@@ -120,6 +120,9 @@ public class MainUIController extends BaseFXController {
     @FXML
     private ChoiceBox<String> encodingChoice;
 
+    @FXML
+    private TextArea consoleTextArea;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ImageView dbImage = new ImageView("icons/computer.png");
@@ -387,9 +390,7 @@ public class MainUIController extends BaseFXController {
         bridge.setDatabaseConfig(selectedDatabaseConfig);
         bridge.setIgnoredColumns(ignoredColumns);
         bridge.setColumnOverrides(columnOverrides);
-        UIProgressCallback alert = new UIProgressCallback(Alert.AlertType.INFORMATION);
-        bridge.setProgressCallback(alert);
-        alert.show();
+        bridge.setProgressCallback(new UIProgressCallback(consoleTextArea));
         PictureProcessStateController pictureProcessStateController = null;
         try {
             //Engage PortForwarding
