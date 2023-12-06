@@ -53,8 +53,8 @@
          <items>
             <AnchorPane maxWidth="500.0" minWidth="100.0" prefHeight="591.0" prefWidth="242.0">
                <children>
-                  <TreeView fx:id="leftDBTree" layoutX="-14.0" maxWidth="234.0" prefHeight="600.0" prefWidth="190.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-21.0" AnchorPane.topAnchor="0.0" />
-                  <TextField fx:id="filterTreeBox" layoutY="504.0" prefHeight="26.0" prefWidth="134.0" promptText="搜索" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <TextField fx:id="filterTreeBox" layoutX="0" prefHeight="26.0" prefWidth="134.0" promptText="搜索" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TreeView fx:id="leftDBTree" layoutY="26.0" maxWidth="234.0" prefHeight="600.0" prefWidth="190.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
                </children>
             </AnchorPane>
             <AnchorPane minWidth="400.0" prefHeight="591.0" prefWidth="756.0">
