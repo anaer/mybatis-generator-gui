@@ -16,11 +16,11 @@
              1.4.x java11
         -->
         <logback.version>1.3.13</logback.version>
-        <hutool-all.version>6.0.0-M8</hutool-all.version>
+        <hutool-all.version>6.0.0-M12</hutool-all.version>
         <mybatis-generator-core.version>1.4.2</mybatis-generator-core.version>
         <sqlite-jdbc.version>3.36.0</sqlite-jdbc.version>
         <junit.version>4.13.2</junit.version>
-        <slf4j-api.version>2.0.9</slf4j-api.version>
+        <slf4j-api.version>2.0.13</slf4j-api.version>
         <jsch.version>0.1.55</jsch.version>
     </properties>
 
