@@ -1,7 +1,7 @@
 package com.zzg.mybatis.generator.view;
 
 import javafx.scene.control.TextArea;
-import org.dromara.hutool.core.date.DatePattern;
+import org.dromara.hutool.core.date.DateFormatPool;
 import org.dromara.hutool.core.date.DateUtil;
 import org.mybatis.generator.api.ProgressCallback;
 
@@ -20,7 +20,7 @@ public class UIProgressCallback implements ProgressCallback {
   }
 
   private void show(String text) {
-    String msg = String.format("%s %s\n", DateUtil.format(new Date(), DatePattern.NORM_TIME_FORMAT), text);
+    String msg = String.format("%s %s%n", DateUtil.format(new Date(), DateFormatPool.NORM_TIME_FORMAT), text);
     consoleTextArea.appendText(msg);
   }
 

@@ -9,7 +9,7 @@ import com.zzg.mybatis.generator.model.DbType;
 import com.zzg.mybatis.generator.model.UITableColumnVO;
 import com.zzg.mybatis.generator.view.AlertUtil;
 import org.dromara.hutool.core.array.ArrayUtil;
-import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.convert.ConvertUtil;
 import org.dromara.hutool.core.regex.ReUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.dromara.hutool.core.text.split.SplitUtil;
@@ -49,12 +49,12 @@ public class DbUtil {
 			java.util.Properties config = new java.util.Properties();
 			config.put("StrictHostKeyChecking", "no");
 			JSch jsch = new JSch();
-			Integer sshPort = Convert.toInt(databaseConfig.getSshPort());
+			Integer sshPort = ConvertUtil.toInt(databaseConfig.getSshPort());
 			int port = sshPort == null ? 22 : sshPort;
 			session = jsch.getSession(databaseConfig.getSshUser(), databaseConfig.getSshHost(), port);
 			if (StrUtil.isNotBlank(databaseConfig.getPrivateKey())) {
 				//使用秘钥方式认证
-				jsch.addIdentity(databaseConfig.getPrivateKey(), StrUtil.defaultIfBlank(databaseConfig.getPrivateKeyPassword(), null));
+				jsch.addIdentity(databaseConfig.getPrivateKey(), databaseConfig.getPrivateKeyPassword());
 			}else {
 				session.setPassword(databaseConfig.getSshPassword());
 			}
@@ -70,8 +70,8 @@ public class DbUtil {
 			AtomicInteger assigned_port = new AtomicInteger();
 			Future<?> result = executorService.submit(() -> {
 				try {
-					Integer localPort = Convert.toInt(config.getLport());
-					Integer RemotePort = Convert.toInt(config.getRport());
+					Integer localPort = ConvertUtil.toInt(config.getLport());
+					Integer RemotePort = ConvertUtil.toInt(config.getRport());
 					int lport = localPort == null ? Integer.parseInt(config.getPort()) : localPort;
 					int rport = RemotePort == null ? Integer.parseInt(config.getPort()) : RemotePort;
 					Session session = portForwardingSession.get(lport);
