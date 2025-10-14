@@ -136,7 +136,7 @@ public class DbUtil {
 
 		DriverManager.setLoginTimeout(DB_CONNECTION_TIMEOUTS_SECONDS);
 	    Connection connection = drivers.get(dbType).connect(url, props);
-        _LOG.info("getConnection, connection url: {}", connection);
+        // _LOG.info("getConnection, connection url: {}", connection);
         return connection;
     }
 
@@ -212,7 +212,7 @@ public class DbUtil {
 		DbType dbType = DbType.valueOf(dbConfig.getDbType());
 		String connectionUrl = String.format(dbType.getConnectionUrlPattern(),
 				portForwarding ? "127.0.0.1" : dbConfig.getHost(), portForwarding ? dbConfig.getLport() : dbConfig.getPort(), dbConfig.getSchema(), dbConfig.getEncoding());
-        _LOG.info("getConnectionUrlWithSchema, connection url: {}", connectionUrl);
+        // _LOG.info("getConnectionUrlWithSchema, connection url: {}", connectionUrl);
         return connectionUrl;
     }
 

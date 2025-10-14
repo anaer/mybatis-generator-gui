@@ -22,7 +22,7 @@
         <junit.version>4.13.2</junit.version>
         <slf4j-api.version>2.0.16</slf4j-api.version>
         <jsch.version>0.1.55</jsch.version>
-        <javafx.version>23.0.2</javafx.version>
+        <javafx.version>17.0.2</javafx.version>
     </properties>
 
     <dependencies>

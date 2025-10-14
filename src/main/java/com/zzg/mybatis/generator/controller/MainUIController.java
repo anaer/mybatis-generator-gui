@@ -10,6 +10,7 @@ import com.zzg.mybatis.generator.util.DbUtil;
 import com.zzg.mybatis.generator.util.MyStringUtils;
 import com.zzg.mybatis.generator.view.AlertUtil;
 import com.zzg.mybatis.generator.view.UIProgressCallback;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -22,6 +23,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import org.dromara.hutool.core.array.ArrayUtil;
 import org.dromara.hutool.core.exception.ExceptionUtil;
 import org.dromara.hutool.core.io.file.FileUtil;
@@ -167,12 +169,15 @@ public class MainUIController extends BaseFXController {
             }
         });
 
-        // 当应用配置, 设置过滤文本框时, 触发事件进行过滤
+        // 设置过滤文本框时, 触发事件进行过滤, 延时触发过滤
+        PauseTransition filterDelay = new PauseTransition(Duration.millis(200));
         filterTreeBox.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (StrUtil.isNotBlank(newValue)) {
+            filterDelay.stop();
+            filterDelay.setOnFinished(event -> {
                 ObservableList<TreeItem<String>> schemas = leftDBTree.getRoot().getChildren();
                 schemas.filtered(TreeItem::isExpanded).forEach(this::displayTables);
-            }
+            });
+            filterDelay.playFromStart();
         });
 
         leftDBTree.setCellFactory((TreeView<String> tv) -> {
@@ -430,6 +435,8 @@ public class MainUIController extends BaseFXController {
                 pictureProcessStateController.playFailState(e.getMessage(), true);
             }
         }
+
+        saveGeneratorConfigSilent(generatorConfig);
     }
 
     private String validateConfig() {
@@ -482,6 +489,22 @@ public class MainUIController extends BaseFXController {
                 _LOG.error("保存配置失败", e);
                 AlertUtil.showErrorAlert("保存配置失败");
             }
+        }
+    }
+
+    /**
+     * 静默保存配置, 不提示任何信息
+     * @param generatorConfig
+     */
+   private void saveGeneratorConfigSilent(GeneratorConfig generatorConfig) {
+        String defaultName = String.format("%s.%s", selectedDatabaseConfig.getSchema(), tableNameField.getText());
+
+        try {
+            generatorConfig.setName(defaultName);
+            ConfigHelper.deleteGeneratorConfig(defaultName);
+            ConfigHelper.saveGeneratorConfig(generatorConfig);
+        } catch (Exception e) {
+            _LOG.error("保存配置失败", e);
         }
     }
 
@@ -547,9 +570,6 @@ public class MainUIController extends BaseFXController {
         useDAOExtendStyle.setSelected(generatorConfig.isUseDAOExtendStyle());
         useSchemaPrefix.setSelected(generatorConfig.isUseSchemaPrefix());
         jsr310Support.setSelected(generatorConfig.isJsr310Support());
-
-        // 应用配置时, 自动填充过滤文本框
-        // filterTreeBox.setText(generatorConfig.getTableName());
     }
 
     @FXML

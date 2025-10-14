@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 25.1014.1548
+
+1. 修复批量update和toString生成冲突
+2. 生成代码时, 静默保存配置, 以db_name.table_name命名
+
 ## 25.219.957
 
 1. 修改默认为JDK11

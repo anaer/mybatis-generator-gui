@@ -217,7 +217,7 @@ public class MybatisGeneratorBridge {
             context.addPluginConfiguration(pluginConfiguration);
         }
         // toString, hashCode, equals插件
-        else if (generatorConfig.isNeedToStringHashcodeEquals()) {
+        if (generatorConfig.isNeedToStringHashcodeEquals()) {
             PluginConfiguration pluginConfiguration1 = createPluginConfiguration(EqualsHashCodePlugin.class);
             context.addPluginConfiguration(pluginConfiguration1);
             PluginConfiguration pluginConfiguration2 = createPluginConfiguration(ToStringPlugin.class);
